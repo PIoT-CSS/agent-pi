@@ -18,8 +18,7 @@ class Subscriber:
     def on_connect(self, client, userdata, flags, rc):
         if rc == 0:
             print("connection established, returned code=", rc)
-            client.subscribe(self.topic_1)
-            client.subscribe(self.topic_2)
+            client.subscribe(self.topic)
         else:
             print("connection error, returned code=", rc)
 

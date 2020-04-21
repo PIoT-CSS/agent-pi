@@ -53,7 +53,7 @@ class Publisher:
             # connect to pi
             client.connect(self.broker_address, self.port)
 
-            # Publish to topic 'localgateway_to_awsiot/b1' for AWS IoT to pickup
+            # Publish to topic
             client.publish(topic, json.dumps(payload))
             client.disconnect()
 
