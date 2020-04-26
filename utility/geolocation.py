@@ -3,11 +3,8 @@ WifiObject.py module, task is to scan Wifi and return Mac Addresses
 in json format to be used by Google Geolocation API
 """
 
-import sys
 import re
 import subprocess
-import time
-import json
 import requests
 
 # define string for regex pattern
@@ -17,10 +14,10 @@ UNKNOWN = "Unknown"
 
 # define regex pattern for Mac Address
 MAC_ADDRESS_PATTERN = re.compile(r'(?:[0-9a-fA-F]:?){12}')
-NUMBER_PATTERN = re.compile('\d+')
+NUMBER_PATTERN = re.compile(r'\d+')
 
 # define array for wifi scanning unix command
-WIFI_SCAN_COMMAND = ["sudo","iwlist","scanning"] #! apt-get -y install wireless-tools
+WIFI_SCAN_COMMAND = ["sudo", "iwlist", "scanning"] #! apt-get -y install wireless-tools
 
 # define url for google geolocation api
 GOOGLE_GEO_API_URL = 'https://www.googleapis.com/geolocation/v1/geolocate?key='
@@ -33,83 +30,82 @@ class Geolocation:
 
     Methods
     -------
-    scanWifiInformation(self):
+    scan_wifi_information(self):
         Uses the command "sudo iwlist scanning" to scan for wifi
-    formatList(self, scanResult):
+    format_list(self, scan_result):
         Splits scan result into 2d array and filters non human readable string
-    convertToJson(self, informationList):
+    convert_to_json(self, information_list):
         Takes in list of wifi information, perform regex operations to extract 
         Mac address, channel, signal strength and return a json object
-    makeRequestToGoogleGeoApi(self, payload): 
+    make_request_to_google_geo_api(self, payload): 
         Send payload to google geolocation api and returns a json response  
     -------
     """
-    
-    def scanWifiInformation(self):
+
+    def scan_wifi_information(self):
         """
         Uses the command "sudo iwlist scanning" to scan for wifi
         """
         results = subprocess.check_output(WIFI_SCAN_COMMAND)
-         
+
         results = results.decode("utf-8") # needed in python 3
-        
+
         return results
 
-    def formatList(self, scanResult):
+    def format_list(self, scan_result):
         """
         Splits scan result into 2d array and filters not human readable string
         """
-        ls = scanResult.split(CELL)
-        ls = ls[1:]
-        wifiList = []
-        
-        for l in ls:
-            wifiInfomration = l.split(NEW_LINE)
-            wifiInfomration = [i for i in wifiInfomration if not re.search(UNKNOWN, i)]
-            wifiList.append(wifiInfomration)
-        
-        return wifiList
-    
-    def convertToJson(self, informationList):
+        split_result = scan_result.split(CELL)
+        split_result = split_result[1:]
+        wifi_list = []
+
+        for wifi in split_result:
+            wifi_information = wifi.split(NEW_LINE)
+            wifi_information = [i for i in wifi_information if not re.search(UNKNOWN, i)]
+            wifi_list.append(wifi_information)
+
+        return wifi_list
+
+    def convert_to_json(self, information_list):
         """
         Takes in list of wifi information, perform regex operations to extract 
         Mac address, channel, signal strenght and return a json object
         """
-        macAddress = re.findall(MAC_ADDRESS_PATTERN, informationList[0])[0]
-        channel = re.findall(NUMBER_PATTERN, informationList[1])[0]
-        signalStrength = re.findall(NUMBER_PATTERN, informationList[3])[2]
-        age = time.time()
+        mac_address = re.findall(MAC_ADDRESS_PATTERN, information_list[0])[0]
+        channel = re.findall(NUMBER_PATTERN, information_list[1])[0]
+        signal_strength = re.findall(NUMBER_PATTERN, information_list[3])[2]
 
-        wifiAccessPoint = {
-            'macAddress': macAddress,
+        wifi_access_point = {
+            'macAddress': mac_address,
             'channel': channel,
-            'signalStrength': signalStrength
-            }
+            'signalStrength': signal_strength
+        }
 
-        return wifiAccessPoint
-    
-    def makeRequestToGoogleGeoApi(self, payload):
+        return wifi_access_point
+
+    def make_request_to_google_geo_api(self, payload):
         """
         Send payload to google geolocation api and returns json
         """
-        url= GOOGLE_GEO_API_URL + GOOGLE_KEY
-        r = requests.post(url, json=payload)
-        print(r.json())
+        url = GOOGLE_GEO_API_URL + GOOGLE_KEY
+        request = requests.post(url, json=payload)
+        print(request.json())
 
-        return r.json()
-    
+        return request.json()
+
     def run(self):
         """
         Init and runs ScanWifi
         """
-        wifiList = self.scanWifiInformation()
-        formattedList = self.formatList(wifiList)
-        postjson = { "wifiAccessPoints": []}
+        wifi_list = self.scan_wifi_information()
+        formatted_list = self.format_list(wifi_list)
+        payload = {"wifiAccessPoints": []}
 
-        for i in formattedList:
-            postjson['wifiAccessPoints'].append(self.convertToJson(i))
-        
-        self.makeRequestToGoogleGeoApi(postjson)
+        for i in formatted_list:
+            payload['wifiAccessPoints'].append(self.convert_to_json(i))
+
+        self.make_request_to_google_geo_api(payload)
 
 
 if __name__ == "__main__":
