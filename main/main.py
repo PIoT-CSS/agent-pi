@@ -1,8 +1,11 @@
 # main
+import publishdata
 
 def main():
-    # init
+    pub = publishdata
+    pub.publish_data('test')
 
 
 if __name__ == "__main__":
-    pass 
+    main()
+    
