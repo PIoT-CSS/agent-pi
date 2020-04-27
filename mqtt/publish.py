@@ -2,7 +2,6 @@ import paho.mqtt.client as mqtt
 import json
 import logging
 import os
-import utility
 
 BROKER_IP = os.getenv("BROKER_IP")
 BROKER_PORT = os.getenv("BROKER_PORT")

@@ -2,7 +2,6 @@
 import paho.mqtt.client as mqtt
 import json
 import os
-import utility.loadconfig as loadconfig
 from dotenv import load_dotenv
 env_path = './.env'
 load_dotenv(dotenv_path=env_path)
