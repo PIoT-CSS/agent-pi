@@ -1,11 +1,10 @@
 # startup
 from mqtt.subscribe import Subscriber
 
-def main():
+def start_up():
     sub = Subscriber()
     sub.subscribe()
 
 
-if __name__ == "__main__":
-    main()
+start_up()
     
