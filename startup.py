@@ -1,5 +1,5 @@
 # startup
-import mqtt.subcribe as Subscriber
+import mqtt.subscribe as Subscriber
 
 def main():
     sub = Subscriber()
