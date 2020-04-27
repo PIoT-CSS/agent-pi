@@ -25,8 +25,6 @@ class Subscriber:
 
     def on_message(self, client, userdata, msg):
         print("topic: {} | payload: {} ".format(msg.topic, msg.payload))
-        payload = {"message": "On"}
-        client.publish(self.topic, json.dumps(payload))
 
     def on_log(self, client, userdata, level, buf):
         print("log ", buf)
