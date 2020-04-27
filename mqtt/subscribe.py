@@ -5,14 +5,16 @@ import os
 from dotenv import load_dotenv
 env_path = './.env'
 load_dotenv(dotenv_path=env_path)
+BROKER_IP = os.getenv("BROKER_IP")
+BROKER_PORT = os.getenv("BROKER_PORT")
 
 
 class Subscriber:
 
     def __init__(self):
         self.topic = "test"
-        self.BROKER_IP = os.getenv("BROKER_IP")
-        self.BROKER_PORT = os.getenv("BROKER_PORT")
+        self.broker_address = str(BROKER_IP)
+        self.port = int(BROKER_PORT)
 
     def on_connect(self, client, userdata, flags, rc):
         if rc == 0:
@@ -30,8 +32,6 @@ class Subscriber:
         print("log ", buf)
 
     def subscribe(self):
-        broker_address = self.BROKER_IP
-        print(broker_address)
         # initialise MQTT Client
         client = mqtt.Client("tomasterpi")
 
@@ -41,5 +41,5 @@ class Subscriber:
         client.on_log = self.on_log
 
         # client.username_pw_set(user, password)
-        client.connect(broker_address)
+        client.connect(self.broker_address, self.port)
         client.loop_forever()

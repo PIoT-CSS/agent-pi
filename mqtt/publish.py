@@ -33,7 +33,7 @@ class Publisher:
         client.loop_stop()
         print("client disconnected OK")
 
-    def publish(self, pub, payload):
+    def publish(self, payload):
         # setting topic to publish to
         topic = "template"
         id = "id"
