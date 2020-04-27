@@ -1,5 +1,5 @@
 # startup
-import mqtt.subscribe as Subscriber
+from mqtt.subscribe import Subscriber
 
 def main():
     sub = Subscriber()
@@ -7,5 +7,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    while True:
+        main()
     
