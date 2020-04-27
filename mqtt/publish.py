@@ -33,11 +33,11 @@ class Publisher:
         client.loop_stop()
         print("client disconnected OK")
 
-    def publish(self, pub, arduinopayload):
+    def publish(self, pub, payload):
         # setting topic to publish to
         topic = "template"
         id = "id"
-        payload = {'pi-id' : id, 'payload': arduinopayload}
+        payload_new = {'pi-id' : id, 'payload': payload}
 
         # create new instance
         client = mqtt.Client("tomasterpi")
@@ -49,6 +49,6 @@ class Publisher:
         client.connect(self.broker_address, self.port)
 
         # Publish to topic
-        client.publish(topic, json.dumps(payload))
+        client.publish(topic, json.dumps(payload_new))
         client.disconnect()
 
