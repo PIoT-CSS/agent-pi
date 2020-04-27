@@ -3,4 +3,4 @@
 IP="$(curl icanhazip.com)"
 
 echo "BROKER_IP=$IP
-BROKER_PORT=1883" > .env
+BROKER_PORT=8080" > .env

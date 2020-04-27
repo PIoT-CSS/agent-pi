@@ -34,7 +34,7 @@ class Subscriber:
         broker_address = self.BROKER_IP
         print(broker_address)
         # initialise MQTT Client
-        client = mqtt.Client("agentpi")
+        client = mqtt.Client("tomasterpi")
 
         # binds functions defined above, on connection, message and log
         client.on_connect = self.on_connect

@@ -3,10 +3,6 @@ import json
 import logging
 import os
 import utility
-from dotenv import load_dotenv
-load_dotenv()
-env_path = './.env'
-load_dotenv(dotenv_path=env_path)
 
 BROKER_IP = os.getenv("BROKER_IP")
 BROKER_PORT = os.getenv("BROKER_PORT")
@@ -39,21 +35,21 @@ class Publisher:
         print("client disconnected OK")
 
     def publish(self, pub, arduinopayload):
-            # setting topic to publish to
-            topic = "template"
-            id = "id"
-            payload = {'pi-id' : id, 'payload': arduinopayload}
+        # setting topic to publish to
+        topic = "template"
+        id = "id"
+        payload = {'pi-id' : id, 'payload': arduinopayload}
 
-            # create new instance
-            client = mqtt.Client("agentpi")
-            client.on_publish = self.on_publish
-            client.on_disconnect = self.on_disconnect
+        # create new instance
+        client = mqtt.Client("tomasterpi")
+        client.on_publish = self.on_publish
+        client.on_disconnect = self.on_disconnect
 
-            # set broker address of raspberry pis
-            # connect to pi
-            client.connect(self.broker_address, self.port)
+        # set broker address of raspberry pis
+        # connect to pi
+        client.connect(self.broker_address, self.port)
 
-            # Publish to topic
-            client.publish(topic, json.dumps(payload))
-            client.disconnect()
+        # Publish to topic
+        client.publish(topic, json.dumps(payload))
+        client.disconnect()
 
