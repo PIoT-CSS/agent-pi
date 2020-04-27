@@ -1,9 +1,9 @@
 # startup
-import mqtt.publish as Publisher
+import mqtt.subcribe as Subscriber
 
 def main():
-    pub = Publisher()
-    pub.publish('test')
+    sub = Subscriber()
+    sub.subscribe()
 
 
 if __name__ == "__main__":
