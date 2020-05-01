@@ -2,9 +2,13 @@ import paho.mqtt.client as mqtt
 import json
 import logging
 import os
+from dotenv import load_dotenv
+load_dotenv()
+env_path="./.env"
+load_dotenv(dotenv_path=env_path)
 
-BROKER_IP = os.getenv("BROKER_IP")
-BROKER_PORT = os.getenv("BROKER_PORT")
+BROKER_MASTER_IP = str(os.getenv("MASTER_IP"))
+PORT = int(os.getenv("PORT"))
 
 '''
 methods
@@ -16,13 +20,11 @@ methods
 
 
 class Publisher:
-    pub = ""
-    broker_address = ""
-    port = ""
 
     def __init__(self):
-        self.broker_address = str(BROKER_IP)
-        self.port = int(BROKER_PORT)
+        self.topic = "test"
+        self.broker_address = BROKER_MASTER_IP
+        self.port = PORT
 
     def on_publish(self, client, userdata, result):
         print("data published \n")
@@ -35,7 +37,6 @@ class Publisher:
 
     def publish(self, payload):
         # setting topic to publish to
-        topic = "template"
         id = "id"
         payload_new = {'pi-id' : id, 'payload': payload}
 
@@ -49,6 +50,6 @@ class Publisher:
         client.connect(self.broker_address, self.port)
 
         # Publish to topic
-        client.publish(topic, json.dumps(payload_new))
+        client.publish(self.topic, json.dumps(payload_new))
         client.disconnect()
 

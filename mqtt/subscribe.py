@@ -1,24 +1,24 @@
-
 import paho.mqtt.client as mqtt
 import json
 import os
 from dotenv import load_dotenv
 env_path = './.env'
 load_dotenv(dotenv_path=env_path)
-BROKER_IP = os.getenv("BROKER_IP")
-BROKER_PORT = os.getenv("BROKER_PORT")
+
+BROKER_AGENT_IP = str(os.getenv("AGENT_IP"))
+PORT = int(os.getenv("PORT"))
 
 
 class Subscriber:
 
     def __init__(self):
         self.topic = "test"
-        self.broker_address = str(BROKER_IP)
-        self.port = int(BROKER_PORT)
+        self.broker_address = BROKER_AGENT_IP
+        self.port = PORT
 
     def on_connect(self, client, userdata, flags, rc):
         if rc == 0:
-            print("connection established, returned code=", rc)
+            print("connection established to %s, returned code=" %(self.broker_address), rc)
             client.subscribe(self.topic)
         else:
             print("connection error, returned code=", rc)
@@ -37,7 +37,7 @@ class Subscriber:
         client.on_connect = self.on_connect
         client.on_message = self.on_message
         client.on_log = self.on_log
-
+        print(self.broker_address)
         # client.username_pw_set(user, password)
-        client.connect(self.broker_address, self.port)
+        client.connect(self.broker_address)
         client.loop_forever()

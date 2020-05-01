@@ -1,9 +1,9 @@
 # main
-import publishdata
+from mqtt.publish import Publisher
 
 def main():
-    pub = publishdata
-    pub.publish_data('test')
+    pub = Publisher()
+    pub.publish('test')
 
 
 if __name__ == "__main__":
