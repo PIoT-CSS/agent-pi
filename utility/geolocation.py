@@ -1,5 +1,5 @@
 """
-WifiObject.py module, task is to scan Wifi and return Mac Addresses
+geolocation.py module, task is to scan Wifi and return Mac Addresses
 in json format to be used by Google Geolocation API
 """
 
