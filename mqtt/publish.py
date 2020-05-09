@@ -37,6 +37,7 @@ class Publisher:
 
     def publish(self, payload):
         # setting topic to publish to
+        topic = "test"
         id = "id"
         payload_new = {'pi-id' : id, 'payload': payload}
 

@@ -1,9 +1,9 @@
 # main
-from mqtt.publish import Publisher
+from mqtt.subscribe import Subscriber
 
 def main():
-    pub = Publisher()
-    pub.publish('test')
+    sub = Subscriber()
+    sub.subscribe()
 
 
 if __name__ == "__main__":
