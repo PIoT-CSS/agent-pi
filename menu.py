@@ -14,15 +14,17 @@ def action(name):
     username = Screen().input('Enter in Username: ')
     password = Screen().input('Enter in Password: ')
     
-    try:
-        pub = Publisher()
-        now_time = datetime.datetime.now().isoformat()
-        location = Geolocation().run()
-        pub.publish({'user': username, 'pass': password, 'timestamp': now_time, 'location': location})
-        #auth = Authenticator()
-        #auth.authenticate_user_pass(username, password)
-    except e:
-        print(e)
+    # try:
+    #     pub = Publisher()
+    #     now_time = datetime.datetime.now().isoformat()
+    #     location = Geolocation().run()
+    #     pub.publish({'user': username, 'pass': password, 'timestamp': now_time, 'location': location})
+    #     #auth = Authenticator()
+    #     #auth.authenticate_user_pass(username, password)
+    # except e:
+    #     print(e)
+    auth = auth.Authenticator()
+    auth.authenticate_user_pass(username, password)
 
 def main():
     # Change some menu formatting

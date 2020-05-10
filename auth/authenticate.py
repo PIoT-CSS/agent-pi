@@ -11,8 +11,8 @@ class Authenticator():
         pub = Publisher()
         now_time = datetime.datetime.isoformat
         authPayload = {}
-        authPayload['user'] = self.username
-        authPayload['pass'] = self.password
+        authPayload['user'] = username
+        authPayload['pass'] = password
         authPayload['datetime'] = now_time
         authPayload['location'] = Geolocation()
         print("PUBLISH")
