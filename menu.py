@@ -23,7 +23,7 @@ def action(name):
     #     #auth.authenticate_user_pass(username, password)
     # except e:
     #     print(e)
-    auth = auth.Authenticator()
+    auth = Authenticator()
     auth.authenticate_user_pass(username, password)
 
 def main():
@@ -68,4 +68,5 @@ def main():
     # Show the menu
     menu.show()
 
-main()
+if __name__=="__main__":
+    main()
