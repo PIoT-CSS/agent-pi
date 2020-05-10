@@ -27,7 +27,7 @@ class Publisher:
         self.port = PORT
 
     def on_publish(self, client, userdata, result):
-        print("data published \n")
+        print("piot data published \n")
         pass
 
     def on_disconnect(self, client, userdata, rc):
@@ -36,11 +36,6 @@ class Publisher:
         print("client disconnected OK")
 
     def publish(self, payload):
-        # setting topic to publish to
-        topic = "test"
-        id = "id"
-        payload_new = {'pi-id' : id, 'payload': payload}
-
         # create new instance
         client = mqtt.Client("tomasterpi")
         client.on_publish = self.on_publish
@@ -51,6 +46,6 @@ class Publisher:
         client.connect(self.broker_address, self.port)
 
         # Publish to topic
-        client.publish(self.topic, json.dumps(payload_new))
+        client.publish(self.topic, json.dumps(payload))
         client.disconnect()
 

@@ -4,15 +4,25 @@ from consolemenu import *
 from consolemenu.format import *
 from consolemenu.items import *
 from auth.authenticate import Authenticator
-
+from mqtt.publish import Publisher
+from utility.geolocation import Geolocation
+import datetime
+import json
 
 def action(name):
     print("\nAuthenticating {}\n".format(name))
     username = Screen().input('Enter in Username: ')
     password = Screen().input('Enter in Password: ')
-
-    auth = Authenticator()
-    auth.authenticate_user_pass(username, password)
+    
+    try:
+        pub = Publisher()
+        now_time = datetime.datetime.now().isoformat()
+        location = Geolocation().run()
+        pub.publish({'user': username, 'pass': password, 'timestamp': now_time, 'location': location})
+        #auth = Authenticator()
+        #auth.authenticate_user_pass(username, password)
+    except e:
+        print(e)
 
 def main():
     # Change some menu formatting
@@ -34,7 +44,7 @@ def main():
                 formatter=submenu_formatter)
     auth = Authenticator()
 
-    unlock_pw= FunctionItem("Unlock the device with Username & Password ", action, args={"with Username & Password"})
+    unlock_pw= FunctionItem("Unlock the device with Username & Password ", action, args={"with Username & Password"}, should_exit=True)
     unlock_fr = CommandItem("Unlock the device with Facial Recoginition", "touch test.txt")
     unlockcar_submenu.append_item(unlock_pw)
     unlockcar_submenu.append_item(unlock_fr)
@@ -54,7 +64,6 @@ def main():
     menu.append_item(submenu_item_2)
 
     # Show the menu
-    menu.start()
-    menu.join()
+    menu.show()
 
 main()

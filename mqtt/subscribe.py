@@ -25,6 +25,7 @@ class Subscriber:
 
     def on_message(self, client, userdata, msg):
         print("topic: {} | payload: {} ".format(msg.topic, msg.payload))
+        # TODO: when payload arrives, initiate AUTH
 
     def on_log(self, client, userdata, level, buf):
         print("log ", buf)

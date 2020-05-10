@@ -91,7 +91,6 @@ class Geolocation:
         url = GOOGLE_GEO_API_URL + GOOGLE_KEY
         request = requests.post(url, json=payload)
         print(request.json())
-
         return request.json()
 
     def run(self):
@@ -105,8 +104,4 @@ class Geolocation:
         for i in formatted_list:
             payload['wifiAccessPoints'].append(self.convert_to_json(i))
 
-        self.make_request_to_google_geo_api(payload)
-
-
-if __name__ == "__main__":
-    Geolocation().run()
+        return self.make_request_to_google_geo_api(payload)

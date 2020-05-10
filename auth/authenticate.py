@@ -15,6 +15,7 @@ class Authenticator():
         authPayload['pass'] = self.password
         authPayload['datetime'] = now_time
         authPayload['location'] = Geolocation()
+        print("PUBLISH")
         pub.publish(authPayload)
 
-        #TODO subcribe to unlock reponse to authethincate
+        #TODO subcribe to unlock reponse to authenticate
