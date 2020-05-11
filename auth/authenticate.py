@@ -2,6 +2,7 @@ from mqtt.publish import Publisher
 from utility.geolocation import Geolocation
 import datetime
 import sys
+import utility.facialrecognition as facialrecognition
 sys.path.append('..')
 
 class Authenticator():
@@ -12,5 +13,11 @@ class Authenticator():
         now_time = datetime.datetime.now().isoformat()
         location = Geolocation().run()
         pub.publish({'user': username, 'pass': password, 'timestamp': now_time, 'location': location})
+        
+    
+    def authenticate_facialrecognition(self):
+        pub = Publisher()
+        now_time = datetime.datetime.now().isoformat()
+        location = Geolocation().run()
+        pub.pub
 
-        #TODO subcribe to unlock reponse to authenticate

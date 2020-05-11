@@ -22,9 +22,10 @@ methods
 class Publisher:
 
     def __init__(self):
-        self.topic = "test"
-        self.broker_address = BROKER_MASTER_IP
-        self.port = PORT
+        self.AUTH_FR_TOPIC = "AUTH/FR"
+        self.AUTH_UP_TOPIC = "AUTH/UP"
+        self.BROKER_ADDRESS = BROKER_MASTER_IP
+        self.BROKER_PORT = PORT
 
     def on_publish(self, client, userdata, result):
         print("piot data published \n")
@@ -35,7 +36,7 @@ class Publisher:
         client.loop_stop()
         print("client disconnected OK")
 
-    def publish(self, payload):
+    def publish(self, payload, auth):
         # create new instance
         client = mqtt.Client("tomasterpi")
         client.on_publish = self.on_publish
@@ -43,9 +44,13 @@ class Publisher:
 
         # set broker address of raspberry pis
         # connect to pi
-        client.connect(self.broker_address, self.port)
+        client.connect(self.BROKER_ADDRESS, self.BROKER_PORT)
 
         # Publish to topic
-        client.publish(self.topic, json.dumps(payload))
-        client.disconnect()
+        if auth == 'UP':
+            client.publish(self.AUTH_UP_TOPIC, json.dumps(payload))
+            client.disconnect()
+        elif auth == 'FR':
+            client.publish(self.AUTH_FR_TOPIC, json.dumps(payload))
+            client.disconnect()
 

@@ -2,8 +2,15 @@ import paho.mqtt.client as mqtt
 import json
 import os
 from dotenv import load_dotenv
+import auth.authenticate as Authenticator
+import pickle
+import hashlib
 env_path = './.env'
 load_dotenv(dotenv_path=env_path)
+
+##hashes
+in_hash_md5 = hashlib.md5()
+fout=open("./utility/alex.pickle","wb")
 
 BROKER_AGENT_IP = str(os.getenv("AGENT_IP"))
 PORT = int(os.getenv("PORT"))
@@ -24,8 +31,37 @@ class Subscriber:
             print("connection error, returned code=", rc)
 
     def on_message(self, client, userdata, msg):
+        payload = msg.payload
         print("topic: {} | payload: {} ".format(msg.topic, msg.payload))
         # TODO: when payload arrives, initiate AUTH
+        if msg.topic == 'test':
+            if self.process_message(payload):
+                fout.write(msg.payload)
+
+    def process_message(self, msg):
+        """ 
+            This is the main receiver code
+        """
+        if len(msg)==200: #is header or end
+            msg_in=msg.decode("utf-8")
+            msg_in=msg_in.split(",,")
+            if msg_in[0]=="end": #is it really last packet?
+                in_hash_final=in_hash_md5.hexdigest()
+                if in_hash_final==msg_in[2]:
+                    print("File copied OK -valid hash  ",in_hash_final)
+                else:
+                    print("Bad file receive   ",in_hash_final)
+                return False
+            else:
+                if msg_in[0]!="header":
+                    in_hash_md5.update(msg)
+                    return True
+                else:
+                    return False
+        else:
+            in_hash_md5.update(msg)
+            return True
+            
 
     def on_log(self, client, userdata, level, buf):
         print("log ", buf)

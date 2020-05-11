@@ -13,18 +13,14 @@ def action(name):
     print("\nAuthenticating {}\n".format(name))
     username = Screen().input('Enter in Username: ')
     password = Screen().input('Enter in Password: ')
-    
-    # try:
-    #     pub = Publisher()
-    #     now_time = datetime.datetime.now().isoformat()
-    #     location = Geolocation().run()
-    #     pub.publish({'user': username, 'pass': password, 'timestamp': now_time, 'location': location})
-    #     #auth = Authenticator()
-    #     #auth.authenticate_user_pass(username, password)
-    # except e:
-    #     print(e)
+
     auth = Authenticator()
     auth.authenticate_user_pass(username, password)
+
+def authenticate_facialrecognition(name):
+    print("\nAuthenticating {}\n".format(name))
+    #TODO take a photo
+    auth = Authenticator()
 
 def main():
     # Change some menu formatting
@@ -47,7 +43,7 @@ def main():
     auth = Authenticator()
 
     unlock_pw= FunctionItem("Unlock the device with Username & Password ", action, args={"with Username & Password"}, should_exit=True)
-    unlock_fr = CommandItem("Unlock the device with Facial Recoginition", "touch test.txt")
+    unlock_fr = FunctionItem("Unlock the device with Facial Recoginition", authenticate_facialrecognition(), args={"take a photo"})
     unlockcar_submenu.append_item(unlock_pw)
     unlockcar_submenu.append_item(unlock_fr)
 
