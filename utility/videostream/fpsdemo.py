@@ -25,9 +25,9 @@ while fps._numFrames < args["num_frames"]:
 	frame=vs.read()
 	frame=imutils.resize(frame, width=400)
 	# check to see if the frame should be displayed to our screen
-	if args["display"] > 0:
-		cv2.imshow("Frame", frame)
-		key=cv2.waitKey(1) & 0xFF
+	cv2.imshow("Frame", frame)	
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 	# update the FPS counter
 	fps.update()
 # stop the timer and display FPS information
