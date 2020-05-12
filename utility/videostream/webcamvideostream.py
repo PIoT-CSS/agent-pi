@@ -1,13 +1,13 @@
 from threading import Thread
 import cv2
 
+
 class WebcamVideoStream:
     def __init__(self, src=0):
         # initialize the video camera stream and read the first frame
         # from the stream
         self.stream = cv2.VideoCapture(src)
         (self.grabbed, self.frame) = self.stream.read()
-        
         self.stopped = False
 
     def start(self):
@@ -17,8 +17,8 @@ class WebcamVideoStream:
     def update(self):
         while True:
             if self.stopped
-                return
-            
+            return
+
             (self.grabbed, self.frame) = self.stream.read()
 
     def read(self):
