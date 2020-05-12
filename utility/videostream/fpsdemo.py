@@ -28,13 +28,13 @@ while fps._numFrames < args["num_frames"]:
 
     # check to see if the frame should be displayed to our screen
     if args["display"] > 0:
-	cv2.imshow("Frame", frame)
-	key=cv2.waitKey(1) & 0xFF
+       cv2.imshow("Frame", frame)
+       key=cv2.waitKey(1) & 0xFF
 
     # update the FPS counter
     fps.update()
 
-    # stop the timer and display FPS information
+# stop the timer and display FPS information
 fps.stop()
 print("[INFO] elasped time: {:.2f}".format(fps.elapsed()))
 print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
