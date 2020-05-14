@@ -19,21 +19,28 @@ while True:
     frame = vs.read()
     frame = imutils.resize(frame, width=400)
     
-    rgb_frame = frame[:, :, ::-1]
+    if frame.any():
+        rgb_frame = frame[:, :, ::-1]
+    else:
+        break
+    
+    # Find all the faces in the current frame of video
+    face_locations = face_recognition.face_locations(rgb_frame)
+
+    # Display the results
+    for top, right, bottom, left in face_locations:
+        # Draw a box around the face
+        cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
+    
     # check to see if the frame should be displayed to our screen
     cv2.imshow("Frame", frame)
     
-    # Find all the faces in the current frame of video
-    #face_locations = face_recognition.face_locations(rgb_frame)
-
-    # Display the results
-    #for top, right, bottom, left in face_locations:
-        # Draw a box around the face
-    #    cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
     # update the FPS counter
     fps.update()
+
+    # exit
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 # stop the timer and display FPS information
 fps.stop()
 print("[INFO] elasped time: {:.2f}".format(fps.elapsed()))

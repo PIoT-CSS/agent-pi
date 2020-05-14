@@ -24,7 +24,7 @@ class RecognizeUserFace:
         """
         pickle_file = user + PICKLE_EXTENSION
         data = pickle.loads(open(pickle_file, "rb").read())
-
+        print(pickle_file)
         return data
 
     def encode_input_image(self, user):
@@ -32,6 +32,7 @@ class RecognizeUserFace:
         Turns the input image to encoding
         """
         input_path = INPUT_FOLDER + os.path.sep + user + JPG_EXTENSION
+        print(input_path)
         image = cv2.imread(input_path)
         rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
@@ -62,4 +63,4 @@ class RecognizeUserFace:
         print(self.match_input_with_pickle(pickle_data, input_encodings))
 
 if __name__ == "__main__":
-    RecognizeUserFace().run('alex')
+    RecognizeUserFace().run('linh')
