@@ -15,9 +15,13 @@ INPUT_FOLDER = "input"
 JPG_EXTENSION = ".jpg"
 
 class RecognizeUserFace:
+   
     """
     A class to recognize a user's face with the corresponding encoding.
     """
+
+    def __init__(self):
+        
     def read_pickle(self, user):
         """
         Reads pickle file and returns the contents.
@@ -60,6 +64,3 @@ class RecognizeUserFace:
         pickle_data = self.read_pickle(user)
         input_encodings = self.encode_input_image(user)
         print(self.match_input_with_pickle(pickle_data, input_encodings))
-
-if __name__ == "__main__":
-    RecognizeUserFace().run('alex')
