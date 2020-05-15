@@ -17,10 +17,12 @@ def action(name):
     auth = Authenticator()
     auth.authenticate_user_pass(username, password)
 
-def authenticate_facialrecognition(name):
-    print("\nAuthenticating {}\n".format(name))
+def authenticate_facialrecognition():
+    print("\nAuthenticating with Face Recognition")
     #TODO take a photo
+    username = Screen().input('Enter in Username: ')
     auth = Authenticator()
+    auth.authenticate_facialrecognition(username)
 
 def main():
     # Change some menu formatting
@@ -43,7 +45,7 @@ def main():
     auth = Authenticator()
 
     unlock_pw= FunctionItem("Unlock the device with Username & Password ", action, args={"with Username & Password"}, should_exit=True)
-    unlock_fr = FunctionItem("Unlock the device with Facial Recoginition", authenticate_facialrecognition(), args={"take a photo"})
+    unlock_fr = FunctionItem("Unlock the device with Facial Recoginition", authenticate_facialrecognition())
     unlockcar_submenu.append_item(unlock_pw)
     unlockcar_submenu.append_item(unlock_fr)
 

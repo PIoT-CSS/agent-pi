@@ -6,6 +6,7 @@ import imutils
 import cv2
 import face_recognition
 
+
 # created a *threaded* video stream, allow the camera sensor to warmup,
 # and start the FPS counter
 print("[INFO] sampling THREADED frames from webcam...")
@@ -18,29 +19,27 @@ while True:
     # to have a maximum width of 400 pixels
     frame = vs.read()
     frame = imutils.resize(frame, width=400)
-    
-    if frame.any():
-        rgb_frame = frame[:, :, ::-1]
-    else:
-        break
-    
+
+    rgb_frame = frame[:, :, ::-1]
+
     # Find all the faces in the current frame of video
     face_locations = face_recognition.face_locations(rgb_frame)
 
-    # Display the results
     for top, right, bottom, left in face_locations:
         # Draw a box around the face
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-    
+
     # check to see if the frame should be displayed to our screen
     cv2.imshow("Frame", frame)
-    
-    # update the FPS counter
-    fps.update()
 
-    # exit
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+    elif cv2.waitKey(1) & 0xFF == ord('a'):
+        #AUTHENTICATE
+
+    # update the FPS counter
+        fps.update()
+
 # stop the timer and display FPS information
 fps.stop()
 print("[INFO] elasped time: {:.2f}".format(fps.elapsed()))

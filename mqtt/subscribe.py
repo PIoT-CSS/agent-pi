@@ -19,14 +19,18 @@ PORT = int(os.getenv("PORT"))
 class Subscriber:
 
     def __init__(self):
-        self.topic = "test"
+        self.AUTH_RESP_FR_TOPIC = "AUTH/RESP/FR"
+        self.AUTH_RESP_UP_TOPIC = "AUTH/RESP/UP"
+        self.RETURN_TOPIC = "RETURN"
         self.broker_address = BROKER_AGENT_IP
         self.port = PORT
 
     def on_connect(self, client, userdata, flags, rc):
         if rc == 0:
             print("connection established to %s, returned code=" %(self.broker_address), rc)
-            client.subscribe(self.topic)
+            client.subscribe(self.AUTH_RESP_FR_TOPIC)
+            client.subscribe(self.AUTH_RESP_UP_TOPIC)
+            client.subscribe(self.RETURN_TOPIC)
         else:
             print("connection error, returned code=", rc)
 
@@ -34,9 +38,13 @@ class Subscriber:
         payload = msg.payload
         print("topic: {} | payload: {} ".format(msg.topic, msg.payload))
         # TODO: when payload arrives, initiate AUTH
-        if msg.topic == 'test':
+        if msg.topic == 'AUTH/RESP/FR':
             if self.process_message(payload):
                 fout.write(msg.payload)
+        elif msg.topic == 'AUTH/RESP/UP':
+            print('AUTH/RESP/UP Unlocked!')
+        elif msg.topic == 'RETURN':
+            print('RETURNED CAR')
 
     def process_message(self, msg):
         """ 
@@ -75,6 +83,6 @@ class Subscriber:
         client.on_message = self.on_message
         client.on_log = self.on_log
         print(self.broker_address)
-        # client.username_pw_set(user, password)
+
         client.connect(self.broker_address)
         client.loop_forever()
