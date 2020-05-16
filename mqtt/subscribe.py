@@ -47,7 +47,7 @@ class Subscriber:
                     msg_in = msg_in.split(",,")
                     print("[DEBUG]: ",msg_in)
                     filename = msg_in[1]
-                    fout = open("./utility/pickle/{}{}".format(filename, PICKLE_EXTENSION),"wb")
+                    fout = open("./utility/facialrecognition/pickle/{}{}".format(filename, PICKLE_EXTENSION),"wb")
                     fout.write(msg.payload)
         elif msg.topic == 'AUTH/RESP/UP':
             print('AUTH/RESP/UP Unlocked!')

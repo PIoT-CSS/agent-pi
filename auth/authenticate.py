@@ -32,8 +32,5 @@ class Authenticator():
         vs = VideoStream()
         vs.stream(username)
         fr = RecognizeUserFace()
-        if fr.run(username):
-            return True
-
-        return False
+        return fr.run(username)
 
