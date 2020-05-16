@@ -45,7 +45,7 @@ def main():
     auth = Authenticator()
 
     unlock_pw= FunctionItem("Unlock the device with Username & Password ", action, args={"with Username & Password"}, should_exit=True)
-    unlock_fr = FunctionItem("Unlock the device with Facial Recoginition", authenticate_facialrecognition())
+    unlock_fr = FunctionItem("Unlock the device with Facial Recoginition", authenticate_facialrecognition(), args={"with Facial & Recognition"}, should_exit=True)
     unlockcar_submenu.append_item(unlock_pw)
     unlockcar_submenu.append_item(unlock_fr)
 
