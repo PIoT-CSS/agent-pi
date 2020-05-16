@@ -1,7 +1,5 @@
 from threading import Thread
 import cv2
-import facial_recognition
-
 
 class WebcamVideoStream:
     def __init__(self, src=0):
@@ -12,13 +10,15 @@ class WebcamVideoStream:
         self.stopped = False
 
     def start(self):
-        Thread(target=self.update, args()).start()
+        t = Thread(target=self.update, args=())
+        t.daemon = True
+        t.start()
         return self
 
     def update(self):
         while True:
-            if self.stopped
-            return
+            if self.stopped:
+                return
             
             (self.grabbed, self.frame) = self.stream.read()
 

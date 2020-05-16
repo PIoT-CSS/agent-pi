@@ -13,9 +13,9 @@ DETECTION_METHOD = "hog" # Always hog, raspberry pi is too weak to run cnn.
 
 PICKLE_EXTENSION = ".pickle"
 
-INPUT_FOLDER = "input"
+INPUT_FOLDER = os.path.dirname(os.path.abspath(__file__)) + "/input"
 
-PICKLE_FOLDER = "pickle"
+PICKLE_FOLDER = os.path.dirname(os.path.abspath(__file__)) + "/pickle"
 
 JPG_EXTENSION = ".jpg"
 
@@ -39,6 +39,7 @@ class RecognizeUserFace:
         Reads pickle file and returns the contents.
         """
         pickle_file = PICKLE_FOLDER + os.path.sep + user + PICKLE_EXTENSION
+        #assert os.path.exists(pickle_file)
         print("Using " + pickle_file + " as the data")
         data = pickle.loads(open(pickle_file, "rb").read())
         print(pickle_file)
@@ -49,11 +50,8 @@ class RecognizeUserFace:
         Turns the input image to encoding
         """
         input_path = INPUT_FOLDER + os.path.sep + user + JPG_EXTENSION
-<<<<<<< HEAD
         print(input_path)
-=======
         print("Use " + input_path + " as input")
->>>>>>> 3049abc9d5dac84ae28ad7f9e3cd2b5214b6a4cd
         image = cv2.imread(input_path)
         rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
@@ -88,9 +86,3 @@ class RecognizeUserFace:
         pickle_data = self.read_pickle(user)
         input_encodings = self.encode_input_image(user)
         print(self.match_input_with_pickle(pickle_data, input_encodings))
-<<<<<<< HEAD
-
-if __name__ == "__main__":
-    RecognizeUserFace().run('linh')
-=======
->>>>>>> 3049abc9d5dac84ae28ad7f9e3cd2b5214b6a4cd

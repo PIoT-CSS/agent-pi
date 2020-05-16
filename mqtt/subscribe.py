@@ -10,7 +10,8 @@ load_dotenv(dotenv_path=env_path)
 
 ##hashes
 in_hash_md5 = hashlib.md5()
-fout=open("./utility/alex.pickle","wb")
+
+PICKLE_EXTENSION = ".pickle"
 
 BROKER_AGENT_IP = str(os.getenv("AGENT_IP"))
 PORT = int(os.getenv("PORT"))
@@ -39,8 +40,15 @@ class Subscriber:
         print("topic: {} | payload: {} ".format(msg.topic, msg.payload))
         # TODO: when payload arrives, initiate AUTH
         if msg.topic == 'AUTH/RESP/FR':
-            if self.process_message(payload):
-                fout.write(msg.payload)
+            #if self.process_message(payload):
+             if True:
+                if len(payload)==200:
+                    msg_in = payload.decode("utf-8")
+                    msg_in = msg_in.split(",,")
+                    print("[DEBUG]: ",msg_in)
+                    filename = msg_in[1]
+                    fout = open("./utility/pickle/{}{}".format(filename, PICKLE_EXTENSION),"wb")
+                    fout.write(msg.payload)
         elif msg.topic == 'AUTH/RESP/UP':
             print('AUTH/RESP/UP Unlocked!')
         elif msg.topic == 'RETURN':

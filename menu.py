@@ -10,19 +10,22 @@ import datetime
 import json
 
 def action(name):
-    print("\nAuthenticating {}\n".format(name))
-    username = Screen().input('Enter in Username: ')
-    password = Screen().input('Enter in Password: ')
 
-    auth = Authenticator()
-    auth.authenticate_user_pass(username, password)
-
-def authenticate_facialrecognition():
-    print("\nAuthenticating with Face Recognition")
-    #TODO take a photo
-    username = Screen().input('Enter in Username: ')
-    auth = Authenticator()
-    auth.authenticate_facialrecognition(username)
+    if name == 'UserPass':
+        print("\nAuthenticating {}\n".format(name))
+        username = Screen().input('Enter in Username: ')
+        password = Screen().input('Enter in Password: ')
+        auth = Authenticator()
+        auth.authenticate_user_pass(username, password)
+    
+    elif name == 'FaceRecog':
+        print("\nAuthenticating with Face Recognition")
+        username = Screen().input('Enter in Username: ')
+        auth = Authenticator()
+        if auth.authenticate_facialrecognition(username):
+            Screen().input('Press [Enter] to continue, the car has been unlocked')
+        else:
+            Screen().input('Press [Enter] to continue, the car failed to unlocked')
 
 def main():
     # Change some menu formatting
@@ -44,8 +47,8 @@ def main():
                 formatter=submenu_formatter)
     auth = Authenticator()
 
-    unlock_pw= FunctionItem("Unlock the device with Username & Password ", action, args={"with Username & Password"}, should_exit=True)
-    unlock_fr = FunctionItem("Unlock the device with Facial Recoginition", authenticate_facialrecognition(), args={"with Facial & Recognition"}, should_exit=True)
+    unlock_pw= FunctionItem("Unlock the device with Username & Password ", action, args={"UserPass"}, should_exit=True)
+    unlock_fr = FunctionItem("Unlock the device with Facial Recoginition", action, args={"FaceRecog"}, should_exit=True)
     unlockcar_submenu.append_item(unlock_pw)
     unlockcar_submenu.append_item(unlock_fr)
 
