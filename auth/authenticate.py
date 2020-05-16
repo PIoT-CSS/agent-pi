@@ -20,20 +20,20 @@ class Authenticator():
         
     
     def authenticate_facialrecognition(self, username):
-           # print("[DEBUG] initiate video stream")
-            #vs = VideoStream()
-            #vs.stream(username)
-        #If exists, check if booked, then authenticate
-            pub = Publisher()
-            now_time = datetime.datetime.now().isoformat()
-            location = Geolocation().run()
-            pub.publish({'username': username, 'timestamp': now_time, 'location': location, 'type': 'Encode Face'}, 'FR')
-            print("[DEBUG] initiating videostream")
-            vs = VideoStream()
-            vs.stream(username)
-            fr = RecognizeUserFace()
-            if fr.run(username):
-                return True
+        # print("[DEBUG] initiate video stream")
+        #vs = VideoStream()
+        #vs.stream(username)
+    #If exists, check if booked, then authenticate
+        pub = Publisher()
+        now_time = datetime.datetime.now().isoformat()
+        location = Geolocation().run()
+        pub.publish({'username': username, 'timestamp': now_time, 'location': location, 'type': 'Encode Face'}, 'FR')
+        print("[DEBUG] initiating videostream")
+        vs = VideoStream()
+        vs.stream(username)
+        fr = RecognizeUserFace()
+        if fr.run(username):
+            return True
 
-            return False
+        return False
 
