@@ -85,5 +85,4 @@ class RecognizeUserFace:
         """
         pickle_data = self.read_pickle(user)
         input_encodings = self.encode_input_image(user)
-        # print(self.match_input_with_pickle(pickle_data, input_encodings))
         return self.match_input_with_pickle(pickle_data, input_encodings)

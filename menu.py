@@ -45,7 +45,6 @@ def main():
     # Unlock Car Menu
     unlockcar_submenu = ConsoleMenu("Unlock Car", "Choose your method of authentication",
                 formatter=submenu_formatter)
-    auth = Authenticator()
 
     unlock_pw= FunctionItem("Unlock the device with Username & Password ", action, args={"UserPass"}, should_exit=True)
     unlock_fr = FunctionItem("Unlock the device with Facial Recoginition", action, args={"FaceRecog"}, should_exit=True)
