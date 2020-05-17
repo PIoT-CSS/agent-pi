@@ -41,7 +41,8 @@ class RecognizeUserFace:
         pickle_file = PICKLE_FOLDER + os.path.sep + user + PICKLE_EXTENSION
         #assert os.path.exists(pickle_file)
         print("Using " + pickle_file + " as the data")
-        data = pickle.loads(open(pickle_file, "rb").read())
+        f = open(pickle_file, "rb").read()
+        data = pickle.loads(f)
         print(pickle_file)
         return data
 
@@ -70,7 +71,7 @@ class RecognizeUserFace:
         for input_encoding in input_encodings:
             # Checks if input matches.
             matches = face_recognition.compare_faces(pickle_data["encodings"],
-                input_encoding, tolerance=0.5) # Change tolerance. this needs further testing.
+                input_encoding, tolerance=0.3) # Change tolerance. this needs further testing.
 
             # This print is for debugging. It checks the distance so we can find out the sweet spot.
             print(face_recognition.face_distance(pickle_data["encodings"], input_encoding)) 
@@ -85,7 +86,9 @@ class RecognizeUserFace:
         """
         pickle_data = self.read_pickle(user)
         input_encodings = self.encode_input_image(user)
-        return self.match_input_with_pickle(pickle_data, input_encodings)
+        retVal = self.match_input_with_pickle(pickle_data, input_encodings)
+        print(retVal)
+        return retVal
 
 if __name__ == "__main__":
     RecognizeUserFace().run('linh')

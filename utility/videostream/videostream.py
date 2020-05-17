@@ -8,14 +8,13 @@ import face_recognition
 
 # location for saving images
 INPUT_FOLDER = "../facialrecognition/input"
-# created a *threaded* video stream, allow the camera sensor to warmup,
-# and start the FPS counter
-print("[INFO] sampling THREADED frames from webcam...")
 vs = WebcamVideoStream(src=0).start()
 fps = FPS().start()
 
+# created a *threaded* video stream, allow the camera sensor to warmup,
+# and start the FPS counter
 class VideoStream():
-    
+   
     def stream(self, username):
         # loop over some frames...this time using the threaded stream
         while True:
@@ -50,6 +49,3 @@ class VideoStream():
         # do a bit of cleanup
         cv2.destroyAllWindows()
         vs.stop()
-                
-if __name__ == "__main__":
-    VideoStream().stream('linh')

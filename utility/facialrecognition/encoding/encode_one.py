@@ -15,26 +15,14 @@ DETECTION_METHOD = "hog" # Raspberry pi can only run hog due to hardware constra
 
 DATASET_FOLDER = "dataset" # Folder name containing user images separated by folders.
 
-PICKLE_FOLDER = "pickle"
-
 PICKLE_EXTENSION = ".pickle"
+
+PICKLE_FOLDER = os.path.abspath(".") + "/utility/facialrecognition/pickle/"
 
 class EncodeOne:
     """
     A class to encode images of a user.
-
-    Methods
-        get_images_list_from_a_user(self, user)
-            Returns image list from a particular user dataset
-        create_encodings_from_list(self, images_list)
-            Loops through a user images list and returns an encoding array
-            which will be serialized to a .pickle file.
-        turn_encodings_to_pickle(self, encodings, user)
-            Create a .pickle file from encodings
-        run(self, user)
-            Init and runs Encode
     """
-    
     def get_images_list_from_a_user(self, user):
         """
         Returns image list from a particular user dataset
@@ -73,8 +61,8 @@ class EncodeOne:
         """
         Create a .pickle file from encodings
         """
-        filename = pickle + os.path.sep + user + PICKLE_EXTENSION
-        print("Writing to " + filename)
+        filename = PICKLE_FOLDER + user + PICKLE_EXTENSION
+        print(filename)
         data = {"encodings": encodings, "names": user}
         f = open(filename, "wb")
         f.write(pickle.dumps(data))
@@ -87,6 +75,7 @@ class EncodeOne:
         images_list = self.get_images_list_from_a_user(user)
         encodings = self.create_encodings_from_list(images_list)
         self.turn_encodings_to_pickle(encodings, user)
+        print("Encoded pickle")
 
 if __name__ == "__main__":
-    EncodeOne().run("alex")
+    EncodeOne().run('linh')

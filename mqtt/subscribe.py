@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 import json
 import os
 from dotenv import load_dotenv
-import auth.authenticate as Authenticator
+from utility.facialrecognition.encoding.encode_one import EncodeOne 
 import pickle
 import hashlib
 env_path = './.env'
@@ -11,7 +11,8 @@ load_dotenv(dotenv_path=env_path)
 ##hashes
 in_hash_md5 = hashlib.md5()
 
-PICKLE_EXTENSION = ".pickle"
+DATASET_FOLDER = "./utility/facialrecognition/encoding/dataset" 
+DATASET_EXTENSION = ".jpg"
 
 BROKER_AGENT_IP = str(os.getenv("AGENT_IP"))
 PORT = int(os.getenv("PORT"))
@@ -25,6 +26,7 @@ class Subscriber:
         self.RETURN_TOPIC = "RETURN"
         self.broker_address = BROKER_AGENT_IP
         self.port = PORT
+        self.USERNAME = "test"
 
     def on_connect(self, client, userdata, flags, rc):
         if rc == 0:
@@ -40,15 +42,16 @@ class Subscriber:
         print("topic: {} | payload: {} ".format(msg.topic, msg.payload))
         # TODO: when payload arrives, initiate AUTH
         if msg.topic == 'AUTH/RESP/FR':
-            #if self.process_message(payload):
-             if True:
-                if len(payload)==200:
-                    msg_in = payload.decode("utf-8")
-                    msg_in = msg_in.split(",,")
-                    print("[DEBUG]: ",msg_in)
-                    filename = msg_in[1]
-                    fout = open("./utility/facialrecognition/pickle/{}{}".format(filename, PICKLE_EXTENSION),"wb")
-                    fout.write(msg.payload)
+            if self.process_message(payload):
+                print("USERNAME", self.USERNAME)
+                save_img = "{}/{}/{}{}".format(DATASET_FOLDER, self.USERNAME, self.USERNAME, DATASET_EXTENSION)
+                print("[WRITING] ", msg.payload)
+                with open(save_img, "wb") as fh:
+                    fh.write(payload)
+                print("Image Received")
+                #create encoding
+                enc = EncodeOne()
+                enc.run(self.USERNAME)
         elif msg.topic == 'AUTH/RESP/UP':
             print('AUTH/RESP/UP Unlocked!')
         elif msg.topic == 'RETURN':
@@ -61,22 +64,14 @@ class Subscriber:
         if len(msg)==200: #is header or end
             msg_in=msg.decode("utf-8")
             msg_in=msg_in.split(",,")
-            if msg_in[0]=="end": #is it really last packet?
-                in_hash_final=in_hash_md5.hexdigest()
-                if in_hash_final==msg_in[2]:
-                    print("File copied OK -valid hash  ",in_hash_final)
-                else:
-                    print("Bad file receive   ",in_hash_final)
+            print("[PROCESS]", msg_in)
+            if msg_in[0]=="header": #is it really last packet?
+                self.USERNAME = msg_in[1]
+                print("[DEBUG] 1")
                 return False
-            else:
-                if msg_in[0]!="header":
-                    in_hash_md5.update(msg)
-                    return True
-                else:
-                    return False
-        else:
-            in_hash_md5.update(msg)
-            return True
+        
+        print("[DEBUG]")
+        return True
             
 
     def on_log(self, client, userdata, level, buf):
@@ -94,3 +89,4 @@ class Subscriber:
 
         client.connect(self.broker_address)
         client.loop_forever()
+        

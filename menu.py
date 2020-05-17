@@ -25,7 +25,7 @@ def action(name):
         if auth.authenticate_facialrecognition(username):
             Screen().input('Press [Enter] to continue, the car has been unlocked')
         else:
-            Screen().input('Press [Enter] to continue, the car failed to unlocked')
+            Screen().input('Press [Enter] to continue, the car failed to unlock')
 
 def main():
     # Change some menu formatting
