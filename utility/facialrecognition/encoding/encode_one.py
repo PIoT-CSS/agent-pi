@@ -17,7 +17,7 @@ DATASET_FOLDER = "dataset" # Folder name containing user images separated by fol
 
 PICKLE_EXTENSION = ".pickle"
 
-PICKLE_FOLDER = os.path.abspath(".") + "/utility/facialrecognition/pickle/"
+PICKLE_FOLDER = os.path.abspath(".") + "/pickle/"
 
 class EncodeOne:
     """
