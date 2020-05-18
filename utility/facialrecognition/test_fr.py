@@ -25,7 +25,7 @@ alexPickleData = fr.read_pickle('alex')
 linhPickleData = fr.read_pickle('linh')
 
 alexInputEncodings = fr.encode_input_image('alex')
-linhPickleData = fr.encode_input_image('linh')
+linhInputEncodings = fr.encode_input_image('linh')
 
 ### Begin test for EncodeOne ###
 
@@ -73,7 +73,9 @@ def test_valid_match():
 
 def test_invalid_match():
     # Try matching linh.pickle with alex.jpg should return False.
-    match = fr.match_input_with_pickle(linhPickleData, alexInputEncodings)
+    match1 = fr.match_input_with_pickle(linhPickleData, alexInputEncodings)
+    match2 = fr.match_input_with_pickle(alexPickleData, linhInputEncodings)
 
     # Should not match.
-    assert match == False
+    assert match1 == False
+    assert match2 == False
