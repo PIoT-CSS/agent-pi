@@ -55,7 +55,7 @@ class EncodeOne:
             
             # compute the facial embedding for the face
             encodings = face_recognition.face_encodings(rgb, boxes)
-            print("[DEBUG]" + len(encodings) + " if 0 fail to encode")
+            print("[DEBUG] " + str(len(encodings)) + " if 0 fail to encode")
             return encodings
 
     def turn_encodings_to_pickle(self, encodings, user):
