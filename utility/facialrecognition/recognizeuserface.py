@@ -57,10 +57,8 @@ class RecognizeUserFace:
         # Detect the face boundaries and encode it.
         boxes = face_recognition.face_locations(rgb,
                 model=DETECTION_METHOD)
+        print("[DEBUG] " + str(len(boxes)) + ", if 0, no face detected")
         encodings = face_recognition.face_encodings(rgb, boxes)
-
-        # Debugging, if this is 0 then no face is recognised.
-        print(len(encodings)) 
 
         return encodings
 
@@ -75,7 +73,7 @@ class RecognizeUserFace:
                 input_encoding, tolerance=0.4) # Change tolerance. this needs further testing.
 
             # This print is for debugging. It checks the distance so we can find out the sweet spot.
-            print(face_recognition.face_distance(pickle_data["encodings"], input_encoding)) 
+            print("[DEBUG] " + str(face_recognition.face_distance(pickle_data["encodings"], input_encoding))) 
 
             # Checks if we found a match
             if True in matches:
