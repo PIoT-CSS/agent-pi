@@ -43,7 +43,6 @@ class RecognizeUserFace:
         print("Using " + pickle_file + " as the data")
         f = open(pickle_file, "rb").read()
         data = pickle.loads(f)
-        print(pickle_file)
         return data
 
     def encode_input_image(self, user):
@@ -51,8 +50,7 @@ class RecognizeUserFace:
         Turns the input image to encoding
         """
         input_path = INPUT_FOLDER + os.path.sep + user + JPG_EXTENSION
-        print(input_path)
-        print("Use " + input_path + " as input")
+        print("Using " + input_path + " as input")
         image = cv2.imread(input_path)
         rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
@@ -60,6 +58,9 @@ class RecognizeUserFace:
         boxes = face_recognition.face_locations(rgb,
                 model=DETECTION_METHOD)
         encodings = face_recognition.face_encodings(rgb, boxes)
+
+        # Debugging, if this is 0 then no face is recognised.
+        print(len(encodings)) 
 
         return encodings
 
@@ -71,7 +72,7 @@ class RecognizeUserFace:
         for input_encoding in input_encodings:
             # Checks if input matches.
             matches = face_recognition.compare_faces(pickle_data["encodings"],
-                input_encoding, tolerance=0.3) # Change tolerance. this needs further testing.
+                input_encoding, tolerance=0.4) # Change tolerance. this needs further testing.
 
             # This print is for debugging. It checks the distance so we can find out the sweet spot.
             print(face_recognition.face_distance(pickle_data["encodings"], input_encoding)) 
@@ -79,6 +80,8 @@ class RecognizeUserFace:
             # Checks if we found a match
             if True in matches:
                 return True
+            else:
+                return False
 
     def run(self, user):
         """
