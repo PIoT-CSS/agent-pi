@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 import json
 import os
 from dotenv import load_dotenv
-from utility.facialrecognition.encoding.encode_one import EncodeOne 
+from utility.facialrecognition.encode_one import EncodeOne 
 import pickle
 import hashlib
 env_path = './.env'
@@ -11,7 +11,7 @@ load_dotenv(dotenv_path=env_path)
 ##hashes
 in_hash_md5 = hashlib.md5()
 
-DATASET_FOLDER = "./utility/facialrecognition/encoding/dataset" 
+DATASET_FOLDER = "./utility/facialrecognition/dataset" 
 DATASET_EXTENSION = ".jpg"
 
 BROKER_AGENT_IP = str(os.getenv("AGENT_IP"))
@@ -76,7 +76,7 @@ class Subscriber:
 
     def on_log(self, client, userdata, level, buf):
         print("log ", buf)
-
+    
     def subscribe(self):
         # initialise MQTT Client
         client = mqtt.Client("tomasterpi")
@@ -89,4 +89,4 @@ class Subscriber:
 
         client.connect(self.broker_address)
         client.loop_forever()
-        
+       

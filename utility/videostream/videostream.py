@@ -8,7 +8,6 @@ import face_recognition
 
 # location for saving images
 INPUT_FOLDER = "../facialrecognition/input"
-vs = WebcamVideoStream(src=0).start()
 fps = FPS().start()
 
 # created a *threaded* video stream, allow the camera sensor to warmup,
@@ -16,6 +15,7 @@ fps = FPS().start()
 class VideoStream():
    
     def stream(self, username):
+        vs = WebcamVideoStream(src=0).start()
         # loop over some frames...this time using the threaded stream
         while True:
             # grab the frame from the threaded video stream and resize it
