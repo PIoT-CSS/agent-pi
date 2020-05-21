@@ -31,6 +31,6 @@ class Authenticator():
         print("[DEBUG] initiating videostream")
         vs = VideoStream()
         vs.stream(username)
-       # fr = RecognizeUserFace()
-        #return fr.run(username)
+        fr = RecognizeUserFace()
+        return fr.run(username)
 
