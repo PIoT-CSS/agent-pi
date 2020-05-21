@@ -57,8 +57,13 @@ class RecognizeUserFace:
         # Detect the face boundaries and encode it.
         boxes = face_recognition.face_locations(rgb,
                 model=DETECTION_METHOD)
-        print("[DEBUG] " + str(len(boxes)) + ", if 0, no face detected")
+        
         encodings = face_recognition.face_encodings(rgb, boxes)
+
+        if (len(encodings) == 1):
+            print("[DEBUG] Face found, encoded successfuly")
+        else:
+            print("[DEBUG] No face found")
 
         return encodings
 
