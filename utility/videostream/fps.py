@@ -1,34 +1,70 @@
+"""
+fps.py module, finds out the frames per second that was captured.
+"""
+
 # import the necessary packages
 import datetime
 
-
 class FPS:
+    """
+    a class to figure out fps.
+
+    Methods
+    -------
+    __init__(self):
+        store the start time, end time, and total number of frames
+        that were examined between the start and end intervals
+    start(self):
+        start the timer
+    stop(self):
+        stop the timer
+    update(self):
+        increment the total number of frames examined during the
+        start and end intervals
+    elapsed(self):
+        increment the total number of frames examined during the
+        start and end intervals
+    fps(self):
+        compute the (approximate) frames per second
+    """
     def __init__(self):
-        # store the start time, end time, and total number of frames
-        # that were examined between the start and end intervals
+        """
+        store the start time, end time, and total number of frames
+        that were examined between the start and end intervals
+        """
         self._start = None
         self._end = None
         self._numFrames = 0
 
     def start(self):
-        # start the timer
+        """
+        start the timer
+        """
         self._start = datetime.datetime.now()
         return self
 
     def stop(self):
-        # stop the timer
+        """
+        stop the timer
+        """
         self._end = datetime.datetime.now()
 
     def update(self):
-        # increment the total number of frames examined during the
-        # start and end intervals
+        """
+        increment the total number of frames examined during the
+        start and end intervals
+        """
         self._numFrames += 1
 
     def elapsed(self):
-        # return the total number of seconds between the start and
-        # end interval
+        """
+        return the total number of seconds between the start and
+        end interval
+        """
         return (self._end - self._start).total_seconds()
 
     def fps(self):
-        # compute the (approximate) frames per second
+        """
+        compute the (approximate) frames per second
+        """
         return self._numFrames / self.elapsed()
