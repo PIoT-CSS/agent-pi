@@ -10,16 +10,8 @@ via the local database
 
 class Database:
 
-    def getUser(self):
-        # init implementation
-
-
-    def insertUser(self):
-        # init implemetation
-
-
     def get_id(self):
-        conn = sqlite3.connect('../RBPICore/data/rbpi-rmit-iot.db')
+        conn = sqlite3.connect('./rbpi-rmit-iot.db')
         c = conn.cursor()
         c.execute("CREATE TABLE IF NOT EXISTS info (id TEXT PRIMARY KEY)")
 

@@ -4,6 +4,7 @@ import datetime
 import sys
 from utility.facialrecognition.recognizeuserface import RecognizeUserFace
 from utility.videostream.videostream import VideoStream
+from data.database import Database
 import pickle
 import time
 sys.path.append('..')
@@ -16,7 +17,7 @@ class Authenticator():
         pub = Publisher()
         now_time = datetime.datetime.now().isoformat()
         location = Geolocation().run()
-        pub.publish({'username': username, 'pass': password, 'timestamp': now_time, 'location': location}, 'UP')
+        pub.publish({'username': username, 'pass': password, 'agentid':Database().get_id(), 'timestamp': now_time, 'location': location}, 'UP')
         
     
     def authenticate_facialrecognition(self, username):

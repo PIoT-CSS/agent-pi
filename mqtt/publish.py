@@ -29,6 +29,8 @@ class Publisher:
 
     def on_publish(self, client, userdata, result):
         print("piot data published \n")
+        print(result)
+        print(userdata)
         pass
 
     def on_disconnect(self, client, userdata, rc):
