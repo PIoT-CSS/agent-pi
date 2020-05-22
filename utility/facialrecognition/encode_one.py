@@ -17,6 +17,8 @@ DATASET_FOLDER = "dataset" # Folder name containing user images separated by fol
 
 PICKLE_EXTENSION = ".pickle"
 
+PICKLE_FOLDER = os.path.abspath(".") + "/pickle/"
+
 class EncodeOne:
     """
     A class to encode images of a user.
@@ -37,6 +39,7 @@ class EncodeOne:
         """
 
         for(i, imagePath) in enumerate(images_list):
+            print(imagePath)
             print("[INFO] processing image {}/{}".format(i + 1, 
                 len(images_list)))
             
@@ -53,13 +56,19 @@ class EncodeOne:
             # compute the facial embedding for the face
             encodings = face_recognition.face_encodings(rgb, boxes)
             
+            if (len(encodings) == 1):
+                print("[DEBUG] Face found, encoded successfuly")
+            else:
+                print("[DEBUG] No face found")
+            
             return encodings
 
     def turn_encodings_to_pickle(self, encodings, user):
         """
         Create a .pickle file from encodings
         """
-        filename = user + PICKLE_EXTENSION
+        filename = PICKLE_FOLDER + user + PICKLE_EXTENSION
+        print(filename)
         data = {"encodings": encodings, "names": user}
         f = open(filename, "wb")
         f.write(pickle.dumps(data))
@@ -72,7 +81,7 @@ class EncodeOne:
         images_list = self.get_images_list_from_a_user(user)
         encodings = self.create_encodings_from_list(images_list)
         self.turn_encodings_to_pickle(encodings, user)
+        print("Encoded pickle")
 
 if __name__ == "__main__":
-    EncodeOne().run("alex")
-
+    EncodeOne().run('alex')

@@ -5,6 +5,5 @@ def start_up():
     sub = Subscriber()
     sub.subscribe()
 
-
-start_up()
-    
+if __name__ =="__main__":
+    start_up()
