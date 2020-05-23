@@ -69,9 +69,9 @@ class EncodeOne:
             encodings = face_recognition.face_encodings(rgb, boxes)
             
             if (len(encodings) == 1):
-                print("[DEBUG] Face found, encoded successfuly")
+                # print("[DEBUG] Face found, encoded successfuly")
             else:
-                print("[DEBUG] No face found")
+                # print("[DEBUG] No face found")
             
             return encodings
 

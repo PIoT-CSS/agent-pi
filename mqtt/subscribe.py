@@ -104,10 +104,10 @@ class Subscriber:
             print("[PROCESS]", msg_in)
             if msg_in[0]=="header": #is it really last packet?
                 self.USERNAME = msg_in[1]
-                print("[DEBUG] 1")
+                # print("[DEBUG] 1")
                 return False
         
-        print("[DEBUG]")
+        # print("[DEBUG]")
         return True
             
 

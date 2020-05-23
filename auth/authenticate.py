@@ -44,7 +44,7 @@ class Authenticator():
         now_time = datetime.datetime.now().isoformat()
         location = Geolocation().run()
         pub.publish({'username': username, 'timestamp': now_time, 'location': location, 'type': 'Encode Face'}, 'FR')
-        print("[DEBUG] initiating videostream")
+        # print("[DEBUG] initiating videostream")
         vs = VideoStream()
         vs.stream(username)
         fr = RecognizeUserFace()

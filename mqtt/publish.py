@@ -52,7 +52,7 @@ class Publisher:
         """
         function to run on disconnect
         """
-        logging.debug("disconnected, rc=", str(rc))
+        # logging.debug("disconnected, rc=", str(rc))
         client.loop_stop()
         print("client disconnected OK")
 
