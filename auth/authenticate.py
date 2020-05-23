@@ -29,6 +29,10 @@ class Authenticator():
 
     def authenticate_user_pass(self, username, password):
         #TODO publish to authenticate-request topic
+        """
+        When user chooses to authenticate with password, this function will be used.
+        Sends MP the username and password with location of the car.
+        """
         pub = Publisher()
         now_time = datetime.datetime.now().isoformat()
         location = Geolocation().run()
@@ -36,6 +40,10 @@ class Authenticator():
         
     
     def authenticate_facialrecognition(self, username):
+        """
+        If user chooses facial recognition, it will request user picture from MP. user captures
+        their face, runs facial recognition module and returns True/False.
+        """
         # print("[DEBUG] initiate video stream")
         #vs = VideoStream()
         #vs.stream(username)

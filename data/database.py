@@ -17,6 +17,10 @@ class Database:
     """
 
     def get_id(self):
+        """
+        connect to sqllite, gets id of the device, if table/id doesn't exist,
+        it will create table and generate id.
+        """
         conn = sqlite3.connect('./rbpi-rmit-iot.db')
         c = conn.cursor()
         c.execute("CREATE TABLE IF NOT EXISTS info (id TEXT PRIMARY KEY)")
