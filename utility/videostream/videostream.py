@@ -1,3 +1,7 @@
+"""
+videostream.py module, it's job is to start the camera in a thread
+allowing it to warm up.
+"""
 from __future__ import print_function
 from .webcamvideostream import WebcamVideoStream
 from .fps import FPS
@@ -11,11 +15,24 @@ import time
 INPUT_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '../facialrecognition/input'))
 fps = FPS().start()
 
-# created a *threaded* video stream, allow the camera sensor to warmup,
-# and start the FPS counter
 class VideoStream():
+    """
+    A class containing method to save picture captured by webcam.
+
+    Methods
+    -------
+    stream(self, username):
+        created a *threaded* video stream, allow the camera sensor to warmup,
+        and start the FPS counter. Displays the webcam when needed, captures
+        a picture and saves it.
+    """
    
     def stream(self, username):
+        """
+        created a *threaded* video stream, allow the camera sensor to warmup,
+        and start the FPS counter. Displays the webcam when needed, captures
+        a picture and saves it.
+        """
         vs = WebcamVideoStream(src=0).start()
         # loop over some frames...this time using the threaded stream
         while True:

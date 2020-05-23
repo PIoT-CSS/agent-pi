@@ -1,3 +1,7 @@
+"""
+test_fr.py contains tests for facial recognition code.
+"""
+
 import pytest
 import pickle
 import os

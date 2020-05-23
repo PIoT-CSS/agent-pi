@@ -1,3 +1,6 @@
+"""
+module that contains logic for subscribe.
+"""
 import paho.mqtt.client as mqtt
 import json
 import os
@@ -19,8 +22,33 @@ PORT = int(os.getenv("PORT"))
 
 
 class Subscriber:
+    """
+    A class that contains subscriber logic.
+
+    Methods
+    -------
+    __init__(self):
+        initialises the topic routes which it will listen to, ip address, port, username.
+    on_connect(self, client, userdata, flags, rc):
+        subscribe to the topics that were initialised.
+    on_message(self, client, userdata, rc):
+        prints out the topic and payload, prints to console different messages
+        depending on topic. Also handles saving pictures if topic is facial 
+        recognition
+    process_message(self, msg):
+        this is the main receiver code. Processes the message, check if everything 
+        arrives succesfuly.
+    on_log(self, client, userdata, level, buf):
+        function to run for logging.
+    subscribe(self)
+        initialises mqtt client. binds on connect, message and log functions to
+        the client. connects to the address and starts loop.
+    """
 
     def __init__(self):
+        """
+        initialises the topic routes which it will listen to, ip address, port, username.
+        """
         self.AUTH_RESP_FR_TOPIC = "AUTH/RESP/FR"
         self.AUTH_RESP_UP_TOPIC = "AUTH/RESP/UP"
         self.RETURN_TOPIC = "RETURN"
@@ -29,6 +57,9 @@ class Subscriber:
         self.USERNAME = "test"
 
     def on_connect(self, client, userdata, flags, rc):
+        """
+        subscribe to the topics that were initialised.
+        """
         if rc == 0:
             print("connection established to %s, returned code=" %(self.broker_address), rc)
             client.subscribe(self.AUTH_RESP_FR_TOPIC)
@@ -38,6 +69,11 @@ class Subscriber:
             print("connection error, returned code=", rc)
 
     def on_message(self, client, userdata, msg):
+        """
+        prints out the topic and payload, prints to console different messages
+        depending on topic. Also handles saving pictures if topic is facial 
+        recognition.
+        """
         payload = msg.payload
         print("topic: {} | payload: {} ".format(msg.topic, msg.payload))
         # TODO: when payload arrives, initiate AUTH
@@ -59,7 +95,8 @@ class Subscriber:
 
     def process_message(self, msg):
         """ 
-            This is the main receiver code
+        this is the main receiver code. Processes the message, check if everything 
+        arrives succesfuly.
         """
         if len(msg)==200: #is header or end
             msg_in=msg.decode("utf-8")
@@ -67,17 +104,24 @@ class Subscriber:
             print("[PROCESS]", msg_in)
             if msg_in[0]=="header": #is it really last packet?
                 self.USERNAME = msg_in[1]
-                print("[DEBUG] 1")
+                # print("[DEBUG] 1")
                 return False
         
-        print("[DEBUG]")
+        # print("[DEBUG]")
         return True
             
 
     def on_log(self, client, userdata, level, buf):
+        """
+        function to run for logging.
+        """
         print("log ", buf)
     
     def subscribe(self):
+        """
+        initialises mqtt client. binds on connect, message and log functions to
+        the client. connects to the address and starts loop.
+        """
         # initialise MQTT Client
         client = mqtt.Client("tomasterpi")
 

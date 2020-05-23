@@ -22,6 +22,18 @@ PICKLE_FOLDER = os.path.abspath(".") + "/pickle/"
 class EncodeOne:
     """
     A class to encode images of a user.
+
+    Methods
+    -------
+    get_images_list_from_a_user(self, user):
+        Returns image list from a particular user dataset
+    create_encodings_from_list(self, images_list):
+        Loops through a user images list and returns an encoding array
+        which will be serialized to a .pickle file.
+    turn_encodings_to_pickle(self, encodings, user):
+        Create a .pickle file from encodings
+    run(self, user):
+        Init and runs Encode
     """
     def get_images_list_from_a_user(self, user):
         """
@@ -57,9 +69,9 @@ class EncodeOne:
             encodings = face_recognition.face_encodings(rgb, boxes)
             
             if (len(encodings) == 1):
-                print("[DEBUG] Face found, encoded successfuly")
+                # print("[DEBUG] Face found, encoded successfuly")
             else:
-                print("[DEBUG] No face found")
+                # print("[DEBUG] No face found")
             
             return encodings
 

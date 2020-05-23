@@ -1,3 +1,6 @@
+"""
+module for console menu. uses a library to format it.
+"""
 import sys
 
 from consolemenu import *
@@ -10,7 +13,9 @@ import datetime
 import json
 
 def action(name):
-
+    """
+    determines whether to use password or facial recognition for authenticating.
+    """
     if name == 'UserPass':
         print("\nAuthenticating {}\n".format(name))
         username = Screen().input('Enter in Username: ')
@@ -28,6 +33,9 @@ def action(name):
             Screen().input('Press [Enter] to continue, the car failed to unlock')
 
 def main():
+    """
+    contains logic for the console menu.
+    """
     # Change some menu formatting
     menu_format = MenuFormatBuilder().set_border_style_type(MenuBorderStyleType.HEAVY_BORDER) \
     .set_prompt("SELECT>") \

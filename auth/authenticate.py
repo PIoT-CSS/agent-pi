@@ -1,3 +1,6 @@
+"""
+module manages authentication process with mqtt.
+"""
 from mqtt.publish import Publisher
 from utility.geolocation import Geolocation
 import datetime
@@ -11,9 +14,25 @@ sys.path.append('..')
 
 PICKLE_EXTENSION = '.pickle'
 class Authenticator():
+    """
+    Manages authentication using password and facial recognition.
+
+    Methods
+    -------
+    authenticate_user_pass(self, username, password):
+        When user chooses to authenticate with password, this function will be used.
+        Sends MP the username and password with location of the car.
+    authenticate_facialrecognition(self, username):
+        If user chooses facial recognition, it will request user picture from MP. user captures
+        their face, runs facial recognition module and returns True/False.
+    """
 
     def authenticate_user_pass(self, username, password):
         #TODO publish to authenticate-request topic
+        """
+        When user chooses to authenticate with password, this function will be used.
+        Sends MP the username and password with location of the car.
+        """
         pub = Publisher()
         now_time = datetime.datetime.now().isoformat()
         location = Geolocation().run()
@@ -21,6 +40,10 @@ class Authenticator():
         
     
     def authenticate_facialrecognition(self, username):
+        """
+        If user chooses facial recognition, it will request user picture from MP. user captures
+        their face, runs facial recognition module and returns True/False.
+        """
         # print("[DEBUG] initiate video stream")
         #vs = VideoStream()
         #vs.stream(username)
@@ -29,7 +52,7 @@ class Authenticator():
         now_time = datetime.datetime.now().isoformat()
         location = Geolocation().run()
         pub.publish({'username': username, 'timestamp': now_time, 'location': location, 'type': 'Encode Face'}, 'FR')
-        print("[DEBUG] initiating videostream")
+        # print("[DEBUG] initiating videostream")
         vs = VideoStream()
         vs.stream(username)
         fr = RecognizeUserFace()
