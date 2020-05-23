@@ -44,6 +44,8 @@ class Publisher:
         function to run on successful publish
         """
         print("piot data published \n")
+        print(result)
+        print(userdata)
         pass
 
     def on_disconnect(self, client, userdata, rc):
