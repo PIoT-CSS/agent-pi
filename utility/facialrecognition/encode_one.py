@@ -68,11 +68,6 @@ class EncodeOne:
             # compute the facial embedding for the face
             encodings = face_recognition.face_encodings(rgb, boxes)
             
-            if (len(encodings) == 1):
-                # print("[DEBUG] Face found, encoded successfuly")
-            else:
-                # print("[DEBUG] No face found")
-            
             return encodings
 
     def turn_encodings_to_pickle(self, encodings, user):
