@@ -17,7 +17,8 @@ MAC_ADDRESS_PATTERN = re.compile(r'(?:[0-9a-fA-F]:?){12}')
 NUMBER_PATTERN = re.compile(r'\d+')
 
 # define array for wifi scanning unix command
-WIFI_SCAN_COMMAND = ["sudo", "iwlist", "scanning"] #! apt-get -y install wireless-tools
+#! apt-get -y install wireless-tools
+WIFI_SCAN_COMMAND = ["sudo", "iwlist", "scanning"]
 
 # define url for google geolocation api
 GOOGLE_GEO_API_URL = 'https://www.googleapis.com/geolocation/v1/geolocate?key='
@@ -41,6 +42,11 @@ class Geolocation:
     def format_list(self, scan_result):
         """
         Splits scan result into 2d array and filters not human readable string
+
+        :param scan_result: result from sudo iwlist scanning
+        :type scan_result: string
+        :return: wifi_list
+        :rtype: list
         """
         split_result = scan_result.split(CELL)
         split_result = split_result[1:]
@@ -48,15 +54,21 @@ class Geolocation:
 
         for wifi in split_result:
             wifi_information = wifi.split(NEW_LINE)
-            wifi_information = [i for i in wifi_information if not re.search(UNKNOWN, i)]
+            wifi_information = [i for i in wifi_information \
+                if not re.search(UNKNOWN, i)]
             wifi_list.append(wifi_information)
 
         return wifi_list
 
     def convert_to_json(self, information_list):
         """
-        Takes in list of wifi information, perform regex operations to extract 
+        Takes in list of wifi information, perform regex operations to extract
         Mac address, channel, signal strenght and return a json object
+
+        :param information_list: list containing wifi information
+        :type information_list: list
+        :return: wifi_access_point
+        :rtype: dict
         """
         mac_address = re.findall(MAC_ADDRESS_PATTERN, information_list[0])[0]
         channel = re.findall(NUMBER_PATTERN, information_list[1])[0]
@@ -73,6 +85,11 @@ class Geolocation:
     def make_request_to_google_geo_api(self, payload):
         """
         Send payload to google geolocation api and returns json
+
+        :param payload: payload used for the request
+        :type payload: json
+        :return: coordinate
+        :rtype: json
         """
         url = GOOGLE_GEO_API_URL + GOOGLE_KEY
         request = requests.post(url, json=payload)

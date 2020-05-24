@@ -30,7 +30,8 @@ def on_message(client, userdata, msg):
     """
     payload = msg.payload
     m_decode = msg.payload.decode("utf-8", "ignore")
-    print("Payload received from {} topic: {}".format(msg.topic, str(m_decode)))
+    print("Payload received from {} topic: {}" \
+        .format(msg.topic, str(m_decode)))
     if msg.topic == HELLO_TOPIC:
         HELLO_RESP = str(m_decode)
         assert HELLO_MSG == HELLO_RESP

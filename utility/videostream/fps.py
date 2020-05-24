@@ -8,24 +8,6 @@ import datetime
 class FPS:
     """
     a class to figure out fps.
-
-    Methods
-    -------
-    __init__(self):
-        store the start time, end time, and total number of frames
-        that were examined between the start and end intervals
-    start(self):
-        start the timer
-    stop(self):
-        stop the timer
-    update(self):
-        increment the total number of frames examined during the
-        start and end intervals
-    elapsed(self):
-        increment the total number of frames examined during the
-        start and end intervals
-    fps(self):
-        compute the (approximate) frames per second
     """
     def __init__(self):
         """
@@ -39,6 +21,9 @@ class FPS:
     def start(self):
         """
         start the timer
+
+        :return: self
+        :rtype: fps
         """
         self._start = datetime.datetime.now()
         return self
@@ -60,11 +45,17 @@ class FPS:
         """
         return the total number of seconds between the start and
         end interval
+
+        :return: seconds
+        :rtype: number
         """
         return (self._end - self._start).total_seconds()
 
     def fps(self):
         """
         compute the (approximate) frames per second
+
+        :return: fps
+        :rtype: float
         """
         return self._numFrames / self.elapsed()

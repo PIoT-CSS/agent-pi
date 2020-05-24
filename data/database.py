@@ -14,6 +14,9 @@ class Database:
         """
         connect to sqllite, gets id of the device, if table/id doesn't exist,
         it will create table and generate id.
+
+        :return: ID
+        :rtype: string
         """
         conn = sqlite3.connect('./rbpi-rmit-iot.db')
         c = conn.cursor()
