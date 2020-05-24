@@ -11,9 +11,11 @@ import pickle
 import cv2
 import os
 
-DETECTION_METHOD = "hog" # Raspberry pi can only run hog due to hardware constraints.
+# Raspberry pi can only run hog due to hardware constraints.
+DETECTION_METHOD = "hog"
 
-DATASET_FOLDER = "dataset" # Folder name containing user images separated by folders.
+# Folder name containing user images separated by folders.
+DATASET_FOLDER = "dataset"
 
 PICKLE_EXTENSION = ".pickle"
 
@@ -22,22 +24,15 @@ PICKLE_FOLDER = os.path.abspath(".") + "/pickle/"
 class EncodeOne:
     """
     A class to encode images of a user.
-
-    Methods
-    -------
-    get_images_list_from_a_user(self, user):
-        Returns image list from a particular user dataset
-    create_encodings_from_list(self, images_list):
-        Loops through a user images list and returns an encoding array
-        which will be serialized to a .pickle file.
-    turn_encodings_to_pickle(self, encodings, user):
-        Create a .pickle file from encodings
-    run(self, user):
-        Init and runs Encode
     """
     def get_images_list_from_a_user(self, user):
         """
         Returns image list from a particular user dataset
+
+        :param user: name of the user to encode
+        :type user: string
+        :return: imagePaths
+        :rtype: list
         """
         images_path = DATASET_FOLDER + os.path.sep + user
         imagePaths = list(paths.list_images(images_path))
@@ -48,8 +43,12 @@ class EncodeOne:
         """
         Loops through a user images list and returns an encoding array
         which will be serialized to a .pickle file.
-        """
 
+        :param images_list: list of images paths
+        :type images_list: list
+        :return: encodings
+        :rtype: list
+        """
         for(i, imagePath) in enumerate(images_list):
             print(imagePath)
             print("[INFO] processing image {}/{}".format(i + 1, 
@@ -73,6 +72,11 @@ class EncodeOne:
     def turn_encodings_to_pickle(self, encodings, user):
         """
         Create a .pickle file from encodings
+
+        :param encodings: encoding of a face
+        :type encodings: list
+        :param user: user that's being encoded
+        :type user: string
         """
         filename = PICKLE_FOLDER + user + PICKLE_EXTENSION
         print(filename)
@@ -84,6 +88,9 @@ class EncodeOne:
     def run(self, user):
         """
         Init and runs Encode
+        
+        :param user: user that's being encoded
+        :type user: string
         """
         images_list = self.get_images_list_from_a_user(user)
         encodings = self.create_encodings_from_list(images_list)
