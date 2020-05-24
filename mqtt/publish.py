@@ -25,7 +25,7 @@ class Publisher:
     on_publish(self, client, userdata, result):
         function to run on successful publish
     on_disconnect(self, client, userdata, rc):
-        function to run on disconnect
+        function to run on disconnect, contains clean up code, and stops the running of the client.
     publish(self, paylod, auth):
         initialises client and binds functions, publish received payload to MP and disconnects.
     """

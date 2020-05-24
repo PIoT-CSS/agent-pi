@@ -30,16 +30,13 @@ class Subscriber:
     __init__(self):
         initialises the topic routes which it will listen to, ip address, port, username.
     on_connect(self, client, userdata, flags, rc):
-        subscribe to the topics that were initialised.
+        function that runs its implementation on connect of the client with a broker address, initiates the subscription to certain topics as soon as the client successfully connects
     on_message(self, client, userdata, rc):
-        prints out the topic and payload, prints to console different messages
-        depending on topic. Also handles saving pictures if topic is facial 
-        recognition
+        function that runs on recieving a message on any subcribed topics by the mqtt client. This imlementation allows processing the received message, and other actions desired on receiving message.
     process_message(self, msg):
-        this is the main receiver code. Processes the message, check if everything 
-        arrives succesfuly.
+        function that processes the message, checks if the first message, is the header packet, and then proceeds to process the subsequent message that contains the relevant information
     on_log(self, client, userdata, level, buf):
-        function to run for logging.
+        function that logs the actions of the mqtt client
     subscribe(self)
         initialises mqtt client. binds on connect, message and log functions to
         the client. connects to the address and starts loop.
