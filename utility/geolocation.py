@@ -26,20 +26,6 @@ GOOGLE_KEY = 'AIzaSyDeUow5kbHYOmzrm4C3SoyIml16O8CZtkA'
 class Geolocation:
     """
     A class to Scan wifi
-
-
-    Methods
-    -------
-    scan_wifi_information(self):
-        Uses the command "sudo iwlist scanning" to scan for wifi
-    format_list(self, scan_result):
-        Splits scan result into 2d array and filters non human readable string
-    convert_to_json(self, information_list):
-        Takes in list of wifi information, perform regex operations to extract 
-        Mac address, channel, signal strength and return a json object
-    make_request_to_google_geo_api(self, payload): 
-        Send payload to google geolocation api and returns a json response  
-    -------
     """
 
     def scan_wifi_information(self):

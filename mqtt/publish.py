@@ -7,27 +7,17 @@ import logging
 import os
 from dotenv import load_dotenv
 load_dotenv()
-env_path="./.env"
+env_path = "./.env"
 load_dotenv(dotenv_path=env_path)
 
 BROKER_MASTER_IP = str(os.getenv("MASTER_IP"))
 PORT = int(os.getenv("PORT"))
 
+
 class Publisher:
     """
     Class that contains publish logic. when given a payload and route
     it will publish to the correct route.
-    
-    Methods
-    -------
-    __init__(self):
-        initialises routes that it will publish to, ip address of MP and port.
-    on_publish(self, client, userdata, result):
-        function to run on successful publish
-    on_disconnect(self, client, userdata, rc):
-        function to run on disconnect, contains clean up code, and stops the running of the client.
-    publish(self, paylod, auth):
-        initialises client and binds functions, publish received payload to MP and disconnects.
     """
 
     def __init__(self):
@@ -79,4 +69,3 @@ class Publisher:
         elif topic == 'RETURN':
             client.publish('RETURN', json.dumps(payload))
             client.disconnect()
-

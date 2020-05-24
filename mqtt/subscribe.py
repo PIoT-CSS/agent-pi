@@ -24,22 +24,6 @@ PORT = int(os.getenv("PORT"))
 class Subscriber:
     """
     A class that contains subscriber logic.
-
-    Methods
-    -------
-    __init__(self):
-        initialises the topic routes which it will listen to, ip address, port, username.
-    on_connect(self, client, userdata, flags, rc):
-        function that runs its implementation on connect of the client with a broker address, initiates the subscription to certain topics as soon as the client successfully connects
-    on_message(self, client, userdata, rc):
-        function that runs on recieving a message on any subcribed topics by the mqtt client. This imlementation allows processing the received message, and other actions desired on receiving message.
-    process_message(self, msg):
-        function that processes the message, checks if the first message, is the header packet, and then proceeds to process the subsequent message that contains the relevant information
-    on_log(self, client, userdata, level, buf):
-        function that logs the actions of the mqtt client
-    subscribe(self)
-        initialises mqtt client. binds on connect, message and log functions to
-        the client. connects to the address and starts loop.
     """
 
     def __init__(self):
