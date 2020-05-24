@@ -1,0 +1,8 @@
+sphinx
+paho-mqtt
+face_recognition
+python-dotenv
+opencv-python
+imutils
+consolemenu
+console-menu

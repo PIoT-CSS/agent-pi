@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>mqtt package &#8212; CarShare Application 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="startup module" href="startup.html" />
+    <link rel="prev" title="menu module" href="menu.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="mqtt-package">
+<h1>mqtt package<a class="headerlink" href="#mqtt-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-mqtt.publish">
+<span id="mqtt-publish-module"></span><h2>mqtt.publish module<a class="headerlink" href="#module-mqtt.publish" title="Permalink to this headline">¶</a></h2>
+<p>module that contains publish logic.</p>
+<dl class="py class">
+<dt id="mqtt.publish.Publisher">
+<em class="property">class </em><code class="sig-prename descclassname">mqtt.publish.</code><code class="sig-name descname">Publisher</code><a class="headerlink" href="#mqtt.publish.Publisher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class that contains publish logic. when given a payload and route
+it will publish to the correct route.</p>
+<dl class="py method">
+<dt id="mqtt.publish.Publisher.on_disconnect">
+<code class="sig-name descname">on_disconnect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">userdata</span></em>, <em class="sig-param"><span class="n">rc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.publish.Publisher.on_disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>function to run on disconnect</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mqtt.publish.Publisher.on_publish">
+<code class="sig-name descname">on_publish</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">userdata</span></em>, <em class="sig-param"><span class="n">result</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.publish.Publisher.on_publish" title="Permalink to this definition">¶</a></dt>
+<dd><p>function to run on successful publish</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mqtt.publish.Publisher.publish">
+<code class="sig-name descname">publish</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">payload</span></em>, <em class="sig-param"><span class="n">topic</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.publish.Publisher.publish" title="Permalink to this definition">¶</a></dt>
+<dd><p>initialises client and binds functions, publish received payload to MP and disconnects.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mqtt.subscribe">
+<span id="mqtt-subscribe-module"></span><h2>mqtt.subscribe module<a class="headerlink" href="#module-mqtt.subscribe" title="Permalink to this headline">¶</a></h2>
+<p>module that contains logic for subscribe.</p>
+<dl class="py class">
+<dt id="mqtt.subscribe.Subscriber">
+<em class="property">class </em><code class="sig-prename descclassname">mqtt.subscribe.</code><code class="sig-name descname">Subscriber</code><a class="headerlink" href="#mqtt.subscribe.Subscriber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class that contains subscriber logic.</p>
+<dl class="py method">
+<dt id="mqtt.subscribe.Subscriber.on_connect">
+<code class="sig-name descname">on_connect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">userdata</span></em>, <em class="sig-param"><span class="n">flags</span></em>, <em class="sig-param"><span class="n">rc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.subscribe.Subscriber.on_connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>subscribe to the topics that were initialised.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mqtt.subscribe.Subscriber.on_log">
+<code class="sig-name descname">on_log</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">userdata</span></em>, <em class="sig-param"><span class="n">level</span></em>, <em class="sig-param"><span class="n">buf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.subscribe.Subscriber.on_log" title="Permalink to this definition">¶</a></dt>
+<dd><p>function to run for logging.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mqtt.subscribe.Subscriber.on_message">
+<code class="sig-name descname">on_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">userdata</span></em>, <em class="sig-param"><span class="n">msg</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.subscribe.Subscriber.on_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints out the topic and payload, prints to console different messages
+depending on topic. Also handles saving pictures if topic is facial 
+recognition.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mqtt.subscribe.Subscriber.process_message">
+<code class="sig-name descname">process_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.subscribe.Subscriber.process_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>this is the main receiver code. Processes the message, check if everything 
+arrives succesfuly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mqtt.subscribe.Subscriber.subscribe">
+<code class="sig-name descname">subscribe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.subscribe.Subscriber.subscribe" title="Permalink to this definition">¶</a></dt>
+<dd><p>initialises mqtt client. binds on connect, message and log functions to
+the client. connects to the address and starts loop.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mqtt">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mqtt" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">CarShare Application</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">agent-pi</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="auth.html">auth package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">data package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="menu.html">menu module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">mqtt package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="startup.html">startup module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utility.html">utility package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">agent-pi</a><ul>
+      <li>Previous: <a href="menu.html" title="previous chapter">menu module</a></li>
+      <li>Next: <a href="startup.html" title="next chapter">startup module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Thang, Alex, Jiajun, Duy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/mqtt.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
