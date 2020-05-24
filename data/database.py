@@ -8,12 +8,6 @@ class Database:
     """
     A class to obtain id of the device from the database, if not 
     generate ID
-
-    Methods
-    -------
-    get_id(self):
-        connect to sqllite, gets id of the device, if table/id doesn't exist,
-        it will create table and generate id.
     """
 
     def get_id(self):

@@ -39,7 +39,6 @@ class RecognizeUserFace:
         Reads pickle file and returns the contents.
         """
         pickle_file = PICKLE_FOLDER + os.path.sep + user + PICKLE_EXTENSION
-        #assert os.path.exists(pickle_file)
         print("Using " + pickle_file + " as the data")
         f = open(pickle_file, "rb").read()
         data = pickle.loads(f)
@@ -60,11 +59,6 @@ class RecognizeUserFace:
         
         encodings = face_recognition.face_encodings(rgb, boxes)
 
-        if (len(encodings) == 1):
-            # print("[DEBUG] Face found, encoded successfuly")
-        else:
-            # print("[DEBUG] No face found")
-
         return encodings
 
     def match_input_with_pickle(self, pickle_data, input_encodings):
@@ -76,9 +70,6 @@ class RecognizeUserFace:
             # Checks if input matches.
             matches = face_recognition.compare_faces(pickle_data["encodings"],
                 input_encoding, tolerance=0.4) # Change tolerance. this needs further testing.
-
-            # This print is for debugging. It checks the distance so we can find out the sweet spot.
-            # print("[DEBUG] " + str(face_recognition.face_distance(pickle_data["encodings"], input_encoding))) 
 
             # Checks if we found a match
             if True in matches:

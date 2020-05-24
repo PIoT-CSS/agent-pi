@@ -24,25 +24,6 @@ PORT = int(os.getenv("PORT"))
 class Subscriber:
     """
     A class that contains subscriber logic.
-
-    Methods
-    -------
-    __init__(self):
-        initialises the topic routes which it will listen to, ip address, port, username.
-    on_connect(self, client, userdata, flags, rc):
-        subscribe to the topics that were initialised.
-    on_message(self, client, userdata, rc):
-        prints out the topic and payload, prints to console different messages
-        depending on topic. Also handles saving pictures if topic is facial 
-        recognition
-    process_message(self, msg):
-        this is the main receiver code. Processes the message, check if everything 
-        arrives succesfuly.
-    on_log(self, client, userdata, level, buf):
-        function to run for logging.
-    subscribe(self)
-        initialises mqtt client. binds on connect, message and log functions to
-        the client. connects to the address and starts loop.
     """
 
     def __init__(self):
@@ -91,7 +72,10 @@ class Subscriber:
         elif msg.topic == 'AUTH/RESP/UP':
             print('AUTH/RESP/UP Unlocked!')
         elif msg.topic == 'RETURN':
-            print('RETURNED CAR')
+            if msg.payload == 'Return':
+                print('RETURNED CAR')
+            else:
+                print("RETURN CAR DENIED")
 
     def process_message(self, msg):
         """ 
