@@ -56,7 +56,7 @@ class Publisher:
         client.loop_stop()
         print("client disconnected OK")
 
-    def publish(self, payload, auth):
+    def publish(self, payload, topic):
         """
         initialises client and binds functions, publish received payload to MP and disconnects.
         """
@@ -70,10 +70,13 @@ class Publisher:
         client.connect(self.BROKER_ADDRESS, self.BROKER_PORT)
 
         # Publish to topic
-        if auth == 'UP':
+        if topic == 'UP':
             client.publish(self.AUTH_UP_TOPIC, json.dumps(payload))
             client.disconnect()
-        elif auth == 'FR':
+        elif topic == 'FR':
             client.publish(self.AUTH_FR_TOPIC, json.dumps(payload))
+            client.disconnect()
+        elif topic == 'RETURN':
+            client.publish('RETURN', json.dumps(payload))
             client.disconnect()
 

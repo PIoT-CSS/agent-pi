@@ -88,7 +88,10 @@ class Subscriber:
         elif msg.topic == 'AUTH/RESP/UP':
             print('AUTH/RESP/UP Unlocked!')
         elif msg.topic == 'RETURN':
-            print('RETURNED CAR')
+            if msg.payload == 'Return':
+                print('RETURNED CAR')
+            else:
+                print("RETURN CAR DENIED")
 
     def process_message(self, msg):
         """ 

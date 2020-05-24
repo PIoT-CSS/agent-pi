@@ -8,6 +8,7 @@ from consolemenu.format import *
 from consolemenu.items import *
 from auth.authenticate import Authenticator
 from mqtt.publish import Publisher
+from data.database import Database
 from utility.geolocation import Geolocation
 import datetime
 import json
@@ -31,6 +32,14 @@ def action(name):
             Screen().input('Press [Enter] to continue, the car has been unlocked')
         else:
             Screen().input('Press [Enter] to continue, the car failed to unlock')
+    elif name == 'Return':
+        print("\nReturning the car")
+        username = Screen().input('Enter in Username: ')
+        now_time = datetime.datetime.now().isoformat()
+        agent_id = Database().get_id()
+        payload = {'username': username, 'timestamp': now_time, 'location': Geolocation().run(), 'agentid': agent_id}
+        pub = Publisher()
+        pub.publish(payload, 'RETURN')
 
 def main():
     """
@@ -61,7 +70,8 @@ def main():
 
     # Return Car Menu
     returncar_submenu = ConsoleMenu("Return Car", "Return it")
-
+    returncar = FunctionItem("Return the car", action, args={"Return"}, should_exit=True)
+    returncar_submenu.append_item(returncar)
 
     # Menu item for opening submenu 2
     submenu_item_1 = SubmenuItem("Unlock Car", submenu=unlockcar_submenu)
