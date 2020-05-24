@@ -78,7 +78,8 @@ def test_encoding_to_pickle():
 
 def test_valid_match():
     """
-    Should be True, run basically matches test_alex.pickle and test_alex.jpg as input.
+    Should be True, run basically matches test_alex.pickle and test_alex.jpg
+    as input.
     """
 
     match = fr.run('test_alex')

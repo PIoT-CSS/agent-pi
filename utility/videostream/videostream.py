@@ -18,13 +18,6 @@ fps = FPS().start()
 class VideoStream():
     """
     A class containing method to save picture captured by webcam.
-
-    Methods
-    -------
-    stream(self, username):
-        created a *threaded* video stream, allow the camera sensor to warmup,
-        and start the FPS counter. Displays the webcam when needed, captures
-        a picture and saves it.
     """
    
     def stream(self, username):
@@ -32,6 +25,9 @@ class VideoStream():
         created a *threaded* video stream, allow the camera sensor to warmup,
         and start the FPS counter. Displays the webcam when needed, captures
         a picture and saves it.
+
+        :param username: isername that's using the camera
+        :type username: string
         """
         vs = WebcamVideoStream(src=0).start()
         # loop over some frames...this time using the threaded stream

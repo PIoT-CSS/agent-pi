@@ -9,3 +9,14 @@ It is recommended that you have enabled virtual environment. Execute the followi
 pip3 install -r requirements.txt
 ```
 
+#### To run:
+
+Have 2 tabs, execute the following in root folder:
+
+```bash
+python3 startup.py
+```
+
+```bash
+python3 menu.py
+```

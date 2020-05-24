@@ -23,20 +23,15 @@ class RecognizeUserFace:
    
     """
     A class to recognize a user's face with the corresponding encoding.
-
-    Methods 
-        read_pickle(self, user)
-            Reads pickle file and returns the contents.
-        encode_input_image(self, user)
-            Turns the input image to encoding.
-        match_input_with_pickle(self, pickle_data, input_encodings)
-            Match the input image with known encodings and returns true if there's a match
-        run(self, user)
-            Gets pickle, input, and determines if it matches.
     """
     def read_pickle(self, user):
         """
         Reads pickle file and returns the contents.
+
+        :param user: user that's being encoded
+        :type user: string
+        :return: data
+        :rtype: list
         """
         pickle_file = PICKLE_FOLDER + os.path.sep + user + PICKLE_EXTENSION
         print("Using " + pickle_file + " as the data")
@@ -47,6 +42,11 @@ class RecognizeUserFace:
     def encode_input_image(self, user):
         """
         Turns the input image to encoding
+
+        :param user: user that's being encoded
+        :type user: string
+        :return: encodings
+        :rtype: list
         """
         input_path = INPUT_FOLDER + os.path.sep + user + JPG_EXTENSION
         print("Using " + input_path + " as input")
@@ -64,6 +64,13 @@ class RecognizeUserFace:
     def match_input_with_pickle(self, pickle_data, input_encodings):
         """
         Match the input image with known encodings and returns true if there's a match
+
+        :param pickle_data: face encodings from pickle file
+        :type pickle_data: list
+        :param input_encodings: input face encodings
+        :type input_encodings: list
+        :return: boolean
+        :rtype: boolean
         """
         # Loop through encodings
         for input_encoding in input_encodings:
@@ -80,6 +87,11 @@ class RecognizeUserFace:
     def run(self, user):
         """
         Gets pickle, input, and determines if it matches.
+
+        :param user: user that's being encoded
+        :type user: string
+        :return: boolean
+        :rtype: boolean
         """
         pickle_data = self.read_pickle(user)
         input_encodings = self.encode_input_image(user)

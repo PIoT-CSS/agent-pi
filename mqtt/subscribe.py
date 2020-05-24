@@ -28,7 +28,8 @@ class Subscriber:
 
     def __init__(self):
         """
-        initialises the topic routes which it will listen to, ip address, port, username.
+        initialises the topic routes which it will listen to, 
+        ip address, port, username.
         """
         self.AUTH_RESP_FR_TOPIC = "AUTH/RESP/FR"
         self.AUTH_RESP_UP_TOPIC = "AUTH/RESP/UP"
@@ -40,9 +41,20 @@ class Subscriber:
     def on_connect(self, client, userdata, flags, rc):
         """
         subscribe to the topics that were initialised.
+
+        :param client: the client instance for this callback
+        :type client: Client
+        :param userdata: the private user data as
+        set in Client() or user_data_set()
+        :type userdata: any
+        :param flags: response flags sent by the broker
+        :type flags: dict
+        :param rc: result of connection
+        :type rc: integer
         """
         if rc == 0:
-            print("connection established to %s, returned code=" %(self.broker_address), rc)
+            print("connection established to %s, returned code=" \
+                %(self.broker_address), rc)
             client.subscribe(self.AUTH_RESP_FR_TOPIC)
             client.subscribe(self.AUTH_RESP_UP_TOPIC)
             client.subscribe(self.RETURN_TOPIC)
@@ -52,16 +64,25 @@ class Subscriber:
     def on_message(self, client, userdata, msg):
         """
         prints out the topic and payload, prints to console different messages
-        depending on topic. Also handles saving pictures if topic is facial 
+        depending on topic. Also handles saving pictures if topic is facial
         recognition.
+
+        :param client: the client instance for this callback
+        :type client: Client
+        :param userdata: the private user data as set in Client()
+        or user_data_set()
+        :type userdata: any
+        :param msg: an instance of MQTTMessage. This is a class with members
+        topic, payload, qos, retain.
+        :type msg: MQTTMessage
         """
         payload = msg.payload
         print("topic: {} | payload: {} ".format(msg.topic, msg.payload))
-        # TODO: when payload arrives, initiate AUTH
         if msg.topic == 'AUTH/RESP/FR':
             if self.process_message(payload):
                 print("USERNAME", self.USERNAME)
-                save_img = "{}/{}/{}{}".format(DATASET_FOLDER, self.USERNAME, self.USERNAME, DATASET_EXTENSION)
+                save_img = "{}/{}/{}{}".format(DATASET_FOLDER, self.USERNAME,
+                self.USERNAME, DATASET_EXTENSION)
                 print("[WRITING] ", msg.payload)
                 with open(save_img, "wb") as fh:
                     fh.write(payload)
@@ -78,9 +99,14 @@ class Subscriber:
                 print("RETURN CAR DENIED")
 
     def process_message(self, msg):
-        """ 
-        this is the main receiver code. Processes the message, check if everything 
-        arrives succesfuly.
+        """
+        this is the main receiver code. Processes the message, check if
+        everything arrives succesfuly.
+        
+        :param msg: message that was published
+        :type msg: json, string, bytes
+        :return: boolean
+        :rtype: boolean
         """
         if len(msg)==200: #is header or end
             msg_in=msg.decode("utf-8")
@@ -88,16 +114,25 @@ class Subscriber:
             print("[PROCESS]", msg_in)
             if msg_in[0]=="header": #is it really last packet?
                 self.USERNAME = msg_in[1]
-                # print("[DEBUG] 1")
                 return False
         
-        # print("[DEBUG]")
         return True
             
 
     def on_log(self, client, userdata, level, buf):
         """
         function to run for logging.
+
+        :param client: the client instance for this callback
+        :type client: Client
+        :param userdata: the private user data as set in Client() or
+        user_data_set()
+        :type userdata: any
+        :param level: severity of the message
+        :type level: MQTT_LOG_INFO, MQTT_LOG_NOTICE, MQTT_LOG_WARNING,
+        MQTT_LOG_ERR, MQTT_LOG_DEBUG
+        :param buf: message buffer
+        :type buf: bytes
         """
         print("log ", buf)
     

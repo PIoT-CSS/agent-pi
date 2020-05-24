@@ -32,6 +32,14 @@ class Publisher:
     def on_publish(self, client, userdata, result):
         """
         function to run on successful publish
+
+        :param client: the client instance for this callback
+        :type client: Client
+        :param userdata: the private user data as set in Client()
+        or user_data_set()
+        :type userdata: [type]
+        :param result: Data being published
+        :type result: String
         """
         print("piot data published \n")
         print(result)
@@ -41,14 +49,28 @@ class Publisher:
     def on_disconnect(self, client, userdata, rc):
         """
         function to run on disconnect
+
+        :param client: the mqtt client
+        :type client: Client
+        :param userdata: the private user data as set in Client()
+        or user_data_set()
+        :type userdata: [type]
+        :param rc: disconnection result
+        :type rc: int
         """
-        # logging.debug("disconnected, rc=", str(rc))
         client.loop_stop()
         print("client disconnected OK")
 
     def publish(self, payload, topic):
         """
-        initialises client and binds functions, publish received payload to MP and disconnects.
+        initialises client and binds functions, publish received payload
+        to MP and disconnects.
+
+        :param payload: the item that's being sent,
+        will be converted into json.
+        :type payload: any
+        :param topic: topic to publish to
+        :type topic: string
         """
         # create new instance
         client = mqtt.Client("tomasterpi")
