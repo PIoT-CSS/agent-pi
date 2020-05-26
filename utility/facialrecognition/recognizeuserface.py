@@ -13,9 +13,9 @@ DETECTION_METHOD = "hog" # Always hog, raspberry pi is too weak to run cnn.
 
 PICKLE_EXTENSION = ".pickle"
 
-INPUT_FOLDER = os.path.dirname(os.path.abspath(__file__)) + "/input"
+INPUT_FOLDER = "./utility/facialrecognition/input"
 
-PICKLE_FOLDER = os.path.dirname(os.path.abspath(__file__)) + "/pickle"
+PICKLE_FOLDER = "./utility/facialrecognition/pickle"
 
 JPG_EXTENSION = ".jpg"
 
@@ -59,6 +59,8 @@ class RecognizeUserFace:
         
         encodings = face_recognition.face_encodings(rgb, boxes)
 
+        print("[DEBUG] encodings: " + str(len(encodings)))
+
         return encodings
 
     def match_input_with_pickle(self, pickle_data, input_encodings):
@@ -76,7 +78,7 @@ class RecognizeUserFace:
         for input_encoding in input_encodings:
             # Checks if input matches.
             matches = face_recognition.compare_faces(pickle_data["encodings"],
-                input_encoding, tolerance=0.4) # Change tolerance. this needs further testing.
+                input_encoding, tolerance=0.45) # Change tolerance. this needs further testing.
 
             # Checks if we found a match
             if True in matches:
@@ -96,7 +98,6 @@ class RecognizeUserFace:
         pickle_data = self.read_pickle(user)
         input_encodings = self.encode_input_image(user)
         retVal = self.match_input_with_pickle(pickle_data, input_encodings)
-        print(retVal)
         return retVal
 
 if __name__ == "__main__":

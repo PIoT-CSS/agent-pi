@@ -38,8 +38,8 @@ def test_encode_images_path():
     Test if the path is correct based on user parameter.
     """ 
 
-    assert 'dataset/test_alex/test_alex.jpg' in alexImagesPath
-    assert 'dataset/test_linh/test_linh.jpg' in linhImagesPath
+    assert './utility/facialrecognition/dataset/test_alex/test_alex.jpg' in alexImagesPath
+    assert './utility/facialrecognition/dataset/test_linh/test_linh.jpg' in linhImagesPath
 
 def test_encoding_valid_face():
     """

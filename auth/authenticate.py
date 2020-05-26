@@ -31,12 +31,17 @@ class Authenticator():
         pub = Publisher()
         now_time = datetime.datetime.now().isoformat()
         location = Geolocation().run()
-        pub.publish({'username': username, 'pass': password, 'agentid':Database().get_id(), 'timestamp': now_time, 'location': location}, 'UP')
+        pub.publish({'username': username, 
+                     'pass': password, 
+                     'agentid':Database().get_id(), 
+                     'timestamp': now_time, 
+                     'location': location}, 'UP')
         
     
     def authenticate_facialrecognition(self, username):
         """
-        If user chooses facial recognition, it will request user picture from MP. user captures
+        If user chooses facial recognition, 
+        it will request user picture from MP. user captures
         their face, runs facial recognition module and returns True/False.
 
         :param username: user name that's being authenticated
@@ -48,8 +53,25 @@ class Authenticator():
         pub = Publisher()
         now_time = datetime.datetime.now().isoformat()
         location = Geolocation().run()
-        pub.publish({'username': username, 'timestamp': now_time, 'location': location, 'type': 'Encode Face'}, 'FR')
+        agentId = Database().get_id()
+        pub.publish({'username': username, 'timestamp': now_time, 
+                     'location': location, 'agentid':agentId,
+                     'type': 'Encode Face'}, 'FR')
+        perform_facialrecognition(username);
+        return True
+
+    def perform_facialrecognition(self, username):
         vs = VideoStream()
         vs.stream(username)
         fr = RecognizeUserFace()
-        return fr.run(username)
+        now_time = datetime.datetime.now().isoformat()
+        location = Geolocation().run()
+        agentId = Database().get_id()
+        if fr.run(username):
+            pub = Publisher()
+            pub.publish({'username': username, 'timestamp': now_time, 
+                'location': location, 'agentid':agentId,
+                'type': 'Unlock'}, 'FR')
+            return True
+        return False
+    

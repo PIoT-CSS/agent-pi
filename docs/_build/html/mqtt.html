@@ -50,18 +50,50 @@ it will publish to the correct route.</p>
 <dt id="mqtt.publish.Publisher.on_disconnect">
 <code class="sig-name descname">on_disconnect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">userdata</span></em>, <em class="sig-param"><span class="n">rc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.publish.Publisher.on_disconnect" title="Permalink to this definition">¶</a></dt>
 <dd><p>function to run on disconnect</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<em>Client</em>) – the mqtt client</p></li>
+<li><p><strong>userdata</strong> (<em>[</em><em>type</em><em>]</em>) – the private user data as set in Client()
+or user_data_set()</p></li>
+<li><p><strong>rc</strong> (<em>int</em>) – disconnection result</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="mqtt.publish.Publisher.on_publish">
 <code class="sig-name descname">on_publish</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">userdata</span></em>, <em class="sig-param"><span class="n">result</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.publish.Publisher.on_publish" title="Permalink to this definition">¶</a></dt>
 <dd><p>function to run on successful publish</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<em>Client</em>) – the client instance for this callback</p></li>
+<li><p><strong>userdata</strong> – the private user data as set in Client()</p></li>
+</ul>
+</dd>
+</dl>
+<p>or user_data_set()
+:type userdata: [type]
+:param result: Data being published
+:type result: String</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="mqtt.publish.Publisher.publish">
 <code class="sig-name descname">publish</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">payload</span></em>, <em class="sig-param"><span class="n">topic</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.publish.Publisher.publish" title="Permalink to this definition">¶</a></dt>
-<dd><p>initialises client and binds functions, publish received payload to MP and disconnects.</p>
+<dd><p>initialises client and binds functions, publish received payload
+to MP and disconnects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>payload</strong> (<em>any</em>) – the item that’s being sent,
+will be converted into json.</p></li>
+<li><p><strong>topic</strong> (<em>string</em>) – topic to publish to</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -79,27 +111,80 @@ it will publish to the correct route.</p>
 <dt id="mqtt.subscribe.Subscriber.on_connect">
 <code class="sig-name descname">on_connect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">userdata</span></em>, <em class="sig-param"><span class="n">flags</span></em>, <em class="sig-param"><span class="n">rc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.subscribe.Subscriber.on_connect" title="Permalink to this definition">¶</a></dt>
 <dd><p>subscribe to the topics that were initialised.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<em>Client</em>) – the client instance for this callback</p></li>
+<li><p><strong>userdata</strong> – the private user data as</p></li>
+</ul>
+</dd>
+</dl>
+<p>set in Client() or user_data_set()
+:type userdata: any
+:param flags: response flags sent by the broker
+:type flags: dict
+:param rc: result of connection
+:type rc: integer</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="mqtt.subscribe.Subscriber.on_log">
 <code class="sig-name descname">on_log</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">userdata</span></em>, <em class="sig-param"><span class="n">level</span></em>, <em class="sig-param"><span class="n">buf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.subscribe.Subscriber.on_log" title="Permalink to this definition">¶</a></dt>
 <dd><p>function to run for logging.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<em>Client</em>) – the client instance for this callback</p></li>
+<li><p><strong>userdata</strong> – the private user data as set in Client() or</p></li>
+</ul>
+</dd>
+</dl>
+<p>user_data_set()
+:type userdata: any
+:param level: severity of the message
+:type level: MQTT_LOG_INFO, MQTT_LOG_NOTICE, MQTT_LOG_WARNING,
+MQTT_LOG_ERR, MQTT_LOG_DEBUG
+:param buf: message buffer
+:type buf: bytes</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="mqtt.subscribe.Subscriber.on_message">
 <code class="sig-name descname">on_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">userdata</span></em>, <em class="sig-param"><span class="n">msg</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.subscribe.Subscriber.on_message" title="Permalink to this definition">¶</a></dt>
 <dd><p>prints out the topic and payload, prints to console different messages
-depending on topic. Also handles saving pictures if topic is facial 
+depending on topic. Also handles saving pictures if topic is facial
 recognition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<em>Client</em>) – the client instance for this callback</p></li>
+<li><p><strong>userdata</strong> – the private user data as set in Client()</p></li>
+</ul>
+</dd>
+</dl>
+<p>or user_data_set()
+:type userdata: any
+:param msg: an instance of MQTTMessage. This is a class with members
+topic, payload, qos, retain.
+:type msg: MQTTMessage</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="mqtt.subscribe.Subscriber.process_message">
 <code class="sig-name descname">process_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.subscribe.Subscriber.process_message" title="Permalink to this definition">¶</a></dt>
-<dd><p>this is the main receiver code. Processes the message, check if everything 
-arrives succesfuly.</p>
+<dd><p>this is the main receiver code. Processes the message, check if
+everything arrives succesfuly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>msg</strong> (<em>json</em><em>, </em><em>string</em><em>, </em><em>bytes</em>) – message that was published</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -139,7 +224,6 @@ the client. connects to the address and starts loop.</p>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">agent-pi</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="auth.html">auth package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">data package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="menu.html">menu module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">mqtt package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="startup.html">startup module</a></li>

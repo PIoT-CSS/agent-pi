@@ -29,13 +29,14 @@ def action(name):
     elif name == 'FaceRecog':
         print("\nAuthenticating with Face Recognition")
         username = Screen().input('Enter in Username: ')
-        auth = Authenticator()
-        if auth.authenticate_facialrecognition(username):
-            Screen().input('Press [Enter] to continue,' +
-                           'the car has been unlocked')
-        else:
-            Screen().input('Press [Enter] to continue,' +
-                           'the car failed to unlock')
+        # auth = Authenticator()
+        Screen().input("Waiting for camera to take picture")
+        # if auth.authenticate_facialrecognition(username):
+        #     Screen().input('Press [Enter] to continue,' +
+        #                    'the car has been unlocked')
+        # else:
+        #     Screen().input('Press [Enter] to continue,' +
+        #                    'the car failed to unlock')
     elif name == 'Return':
         print("\nReturning the car")
         username = Screen().input('Enter in Username: ')
