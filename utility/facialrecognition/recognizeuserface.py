@@ -59,8 +59,6 @@ class RecognizeUserFace:
         
         encodings = face_recognition.face_encodings(rgb, boxes)
 
-        print("[DEBUG] encodings: " + str(len(encodings)))
-
         return encodings
 
     def match_input_with_pickle(self, pickle_data, input_encodings):
@@ -98,6 +96,7 @@ class RecognizeUserFace:
         pickle_data = self.read_pickle(user)
         input_encodings = self.encode_input_image(user)
         retVal = self.match_input_with_pickle(pickle_data, input_encodings)
+        print("face matched: ", retVal)
         return retVal
 
 if __name__ == "__main__":

@@ -80,11 +80,11 @@ class Subscriber:
         payload = msg.payload
         print("topic: {} | payload: {} ".format(msg.topic, msg.payload))
 
-        if payload == 'Unlocked':
+        if payload == b'"Unlocked"':
             print(msg.topic + ' Unlocked!')
         else:
             if msg.topic == 'AUTH/RESP/FR':
-                if payload == 'Car unlock failed':
+                if payload == b'"Car unlock failed"':
                     print('AUTH/RESP/FR denied!')
                 elif self.process_message(payload):
                     print("USERNAME", self.USERNAME)
@@ -105,7 +105,7 @@ class Subscriber:
             elif msg.topic == 'AUTH/RESP/UP':
                 print('AUTH/RESP/UP denied!')
             elif msg.topic == 'RETURN':
-                if msg.payload == 'Returned':
+                if msg.payload == b'"Returned"':
                     print('RETURNED CAR')
                 else:
                     print("RETURN CAR DENIED")
