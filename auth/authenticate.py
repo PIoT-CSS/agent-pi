@@ -57,7 +57,6 @@ class Authenticator():
         pub.publish({'username': username, 'timestamp': now_time, 
                      'location': location, 'agentid':agentId,
                      'type': 'Encode Face'}, 'FR')
-        perform_facialrecognition(username);
         return True
 
     def perform_facialrecognition(self, username):

@@ -37,3 +37,5 @@ class Database:
         conn.close()
         return ID
 
+if __name__ == "__main__":
+    Database().get_id()
