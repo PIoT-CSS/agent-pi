@@ -10,6 +10,7 @@ from auth.authenticate import Authenticator
 from mqtt.publish import Publisher
 from data.database import Database
 from utility.geolocation import Geolocation
+from utility.btunlock import BluetoothUnlocker
 import datetime
 import json
 
@@ -32,11 +33,13 @@ def action(name):
         auth = Authenticator()
         if auth.authenticate_facialrecognition(username):
             Screen().input("Waiting for camera to take picture")
-        #     Screen().input('Press [Enter] to continue,' +
-        #                    'the car has been unlocked')
-        # else:
-        #     Screen().input('Press [Enter] to continue,' +
-        #                    'the car failed to unlock')
+    elif name == 'EngineerBT':
+        if BluetoothUnlocker().search_and_unlock():
+            Screen().input('The car has been unlocked, '
+                + 'press [enter] to continue.')
+        else:
+            Screen().input('The car failed to unlock, '
+                + 'press [enter] to continue.')
     elif name == 'Return':
         print("\nReturning the car")
         username = Screen().input('Enter in Username: ')
@@ -82,8 +85,11 @@ def main():
     unlock_fr = FunctionItem("Unlock the device with Facial Recoginition",
                              action, args={
                                  "FaceRecog"}, should_exit=True)
+    unlock_engineer_bt = FunctionItem("Unlock with engineer's Bluetooth device",
+                        action, args={"EngineerBT"}, should_exit=True)
     unlockcar_submenu.append_item(unlock_pw)
     unlockcar_submenu.append_item(unlock_fr)
+    unlockcar_submenu.append_item(unlock_engineer_bt)
 
     # Return Car Menu
     returncar_submenu = ConsoleMenu("Return Car", "Return it")
@@ -104,6 +110,8 @@ def main():
     # Show the menu
     menu.show()
 
-
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("Exiting CarShare Application...")
