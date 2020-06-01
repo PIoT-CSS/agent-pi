@@ -5,7 +5,8 @@ import paho.mqtt.client as mqtt
 import json
 import os
 from dotenv import load_dotenv
-from utility.facialrecognition.encode_one import EncodeOne 
+from utility.facialrecognition.encode_one import EncodeOne
+from auth.authenticate import Authenticator
 import pickle
 import hashlib
 env_path = './.env'
@@ -14,7 +15,7 @@ load_dotenv(dotenv_path=env_path)
 ##hashes
 in_hash_md5 = hashlib.md5()
 
-DATASET_FOLDER = "./utility/facialrecognition/dataset" 
+DATASET_FOLDER = "./utility/facialrecognition/dataset"
 DATASET_EXTENSION = ".jpg"
 
 BROKER_AGENT_IP = str(os.getenv("AGENT_IP"))
@@ -78,25 +79,36 @@ class Subscriber:
         """
         payload = msg.payload
         print("topic: {} | payload: {} ".format(msg.topic, msg.payload))
-        if msg.topic == 'AUTH/RESP/FR':
-            if self.process_message(payload):
-                print("USERNAME", self.USERNAME)
-                save_img = "{}/{}/{}{}".format(DATASET_FOLDER, self.USERNAME,
-                self.USERNAME, DATASET_EXTENSION)
-                print("[WRITING] ", msg.payload)
-                with open(save_img, "wb") as fh:
-                    fh.write(payload)
-                print("Image Received")
-                #create encoding
-                enc = EncodeOne()
-                enc.run(self.USERNAME)
-        elif msg.topic == 'AUTH/RESP/UP':
-            print('AUTH/RESP/UP Unlocked!')
-        elif msg.topic == 'RETURN':
-            if msg.payload == 'Return':
-                print('RETURNED CAR')
-            else:
-                print("RETURN CAR DENIED")
+
+        if payload == b'"Unlocked"':
+            print(msg.topic + ' Unlocked!')
+        else:
+            if msg.topic == 'AUTH/RESP/FR':
+                if payload == b'"Car unlock failed"':
+                    print('AUTH/RESP/FR denied!')
+                elif self.process_message(payload):
+                    print("USERNAME", self.USERNAME)
+                    directory = DATASET_FOLDER+"/"+self.USERNAME+"/"
+                    save_img = "{}{}{}".format(directory,
+                                            self.USERNAME,
+                                            DATASET_EXTENSION)
+                    print("[WRITING] ", msg.payload)
+                    if not os.path.exists(directory):
+                        os.makedirs(directory)
+                    with open(save_img, "wb") as fh:
+                        fh.write(payload)
+                    print("Image Received")
+                    #create encoding
+                    enc = EncodeOne()
+                    enc.run(self.USERNAME)
+                    Authenticator().perform_facialrecognition(self.USERNAME)
+            elif msg.topic == 'AUTH/RESP/UP':
+                print('AUTH/RESP/UP denied!')
+            elif msg.topic == 'RETURN':
+                if msg.payload == b'"Returned"':
+                    print('RETURNED CAR')
+                else:
+                    print("RETURN CAR DENIED")
 
     def process_message(self, msg):
         """

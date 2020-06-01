@@ -15,11 +15,11 @@ import os
 DETECTION_METHOD = "hog"
 
 # Folder name containing user images separated by folders.
-DATASET_FOLDER = "dataset"
+DATASET_FOLDER = "./utility/facialrecognition/dataset"
 
 PICKLE_EXTENSION = ".pickle"
 
-PICKLE_FOLDER = os.path.abspath(".") + "/pickle/"
+PICKLE_FOLDER = "./utility/facialrecognition/pickle/"
 
 class EncodeOne:
     """
@@ -50,7 +50,6 @@ class EncodeOne:
         :rtype: list
         """
         for(i, imagePath) in enumerate(images_list):
-            print(imagePath)
             print("[INFO] processing image {}/{}".format(i + 1, 
                 len(images_list)))
             

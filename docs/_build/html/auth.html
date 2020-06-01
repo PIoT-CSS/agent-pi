@@ -45,19 +45,22 @@
 <em class="property">class </em><code class="sig-prename descclassname">auth.authenticate.</code><code class="sig-name descname">Authenticator</code><a class="headerlink" href="#auth.authenticate.Authenticator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Manages authentication using password and facial recognition.</p>
-<dl class="simple">
-<dt>authenticate_user_pass(self, username, password):</dt><dd><p>When user chooses to authenticate with password, this function will be used.
-Sends MP the username and password with location of the car.</p>
-</dd>
-<dt>authenticate_facialrecognition(self, username):</dt><dd><p>If user chooses facial recognition, it will request user picture from MP. user captures
-their face, runs facial recognition module and returns True/False.</p>
-</dd>
-</dl>
 <dl class="py method">
 <dt id="auth.authenticate.Authenticator.authenticate_facialrecognition">
 <code class="sig-name descname">authenticate_facialrecognition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auth.authenticate.Authenticator.authenticate_facialrecognition" title="Permalink to this definition">¶</a></dt>
 <dd><p>If user chooses facial recognition, it will request user picture from MP. user captures
 their face, runs facial recognition module and returns True/False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>username</strong> (<em>string</em>) – user name that’s being authenticated</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -65,6 +68,14 @@ their face, runs facial recognition module and returns True/False.</p>
 <code class="sig-name descname">authenticate_user_pass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span></em>, <em class="sig-param"><span class="n">password</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auth.authenticate.Authenticator.authenticate_user_pass" title="Permalink to this definition">¶</a></dt>
 <dd><p>When user chooses to authenticate with password, this function will be used.
 Sends MP the username and password with location of the car.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>string</em>) – user name that’s being authenticated</p></li>
+<li><p><strong>password</strong> (<em>string</em>) – password that’s being authenticated</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -97,7 +108,6 @@ Sends MP the username and password with location of the car.</p>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">agent-pi</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">auth package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">data package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="menu.html">menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mqtt.html">mqtt package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="startup.html">startup module</a></li>

@@ -53,7 +53,7 @@ class Publisher:
         :param client: the mqtt client
         :type client: Client
         :param userdata: the private user data as set in Client()
-        or user_data_set()
+            or user_data_set()
         :type userdata: [type]
         :param rc: disconnection result
         :type rc: int
@@ -67,7 +67,7 @@ class Publisher:
         to MP and disconnects.
 
         :param payload: the item that's being sent,
-        will be converted into json.
+            will be converted into json.
         :type payload: any
         :param topic: topic to publish to
         :type topic: string

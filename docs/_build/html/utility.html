@@ -48,20 +48,53 @@ in json format to be used by Google Geolocation API</p>
 <dl class="py method">
 <dt id="utility.geolocation.Geolocation.convert_to_json">
 <code class="sig-name descname">convert_to_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">information_list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.geolocation.Geolocation.convert_to_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes in list of wifi information, perform regex operations to extract 
+<dd><p>Takes in list of wifi information, perform regex operations to extract
 Mac address, channel, signal strenght and return a json object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>information_list</strong> (<em>list</em>) – list containing wifi information</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>wifi_access_point</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="utility.geolocation.Geolocation.format_list">
 <code class="sig-name descname">format_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scan_result</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.geolocation.Geolocation.format_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Splits scan result into 2d array and filters not human readable string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scan_result</strong> (<em>string</em>) – result from sudo iwlist scanning</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>wifi_list</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="utility.geolocation.Geolocation.make_request_to_google_geo_api">
 <code class="sig-name descname">make_request_to_google_geo_api</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">payload</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.geolocation.Geolocation.make_request_to_google_geo_api" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send payload to google geolocation api and returns json</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>json</em>) – payload used for the request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>coordinate</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>json</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -106,7 +139,6 @@ Mac address, channel, signal strenght and return a json object</p>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">agent-pi</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="auth.html">auth package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">data package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="menu.html">menu module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mqtt.html">mqtt package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="startup.html">startup module</a></li>
