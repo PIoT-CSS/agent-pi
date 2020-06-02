@@ -3,14 +3,17 @@ videostream.py module, it's job is to start the camera in a thread
 allowing it to warm up.
 """
 from __future__ import print_function
-from .webcamvideostream import WebcamVideoStream
-from .fps import FPS
+# from .webcamvideostream import WebcamVideoStream
+# from .fps import FPS
+from webcamvideostream import WebcamVideoStream
+from fps import FPS
 import argparse
 import imutils
 import cv2
 import face_recognition
 import os
 import time
+from utility.qrdetection import QRDetection
 # location for saving images
 INPUT_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '../facialrecognition/input'))
 fps = FPS().start()
@@ -20,7 +23,7 @@ class VideoStream():
     A class containing method to save picture captured by webcam.
     """
    
-    def stream(self, username):
+    def stream(self, username, type):
         """
         created a *threaded* video stream, allow the camera sensor to warmup,
         and start the FPS counter. Displays the webcam when needed, captures
@@ -39,24 +42,30 @@ class VideoStream():
 
             rgb_frame = frame[:, :, ::-1]
 
-            # Find all the faces in the current frame of video
-           # face_locations = face_recognition.face_locations(rgb_frame)
-
-            #for top, right, bottom, left in face_locations:
-                # Draw a box around the face
-             #   cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-
-            # check to see if the frame should be displayed to our screen
-            cv2.imshow("Frame", frame)
-
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                path = "{}/{}.jpg".format(INPUT_FOLDER, username)
-                cv2.imwrite(path, frame) 
-                print("[INFO] frame saved: {}/{}.jpg".format(INPUT_FOLDER, username))
-                time.sleep(5)
+            if frame is None:
                 break
-            # update the FPS counter
-            fps.update()
+
+            # Detect QR Code
+            qr = QRDetector()
+            box = qr.detect(frame)
+
+            if type == "qrdetect": 
+                if box is not None:
+                    cv2.drawContours(frame, [box], -1, (0, 255, 0), 2)
+                
+                cv2.imshow("Frame", frame)
+	            
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+            elif type == "facialrecognition":
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    path = "{}/{}.jpg".format(INPUT_FOLDER, username)
+                    cv2.imwrite(path, frame) 
+                    print("[INFO] frame saved: {}/{}.jpg".format(INPUT_FOLDER, username))
+                    time.sleep(5)
+                    break
+                # update the FPS counter
+                fps.update()
 
         # stop the timer and display FPS information
         fps.stop()
@@ -67,4 +76,4 @@ class VideoStream():
         vs.stop()
 
 if __name__ == "__main__":
-    VideoStream().stream('linh')
+    VideoStream().stream('linh', 'qrdetect')
