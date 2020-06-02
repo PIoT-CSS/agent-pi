@@ -13,16 +13,17 @@ class QRDetection:
     A class to read QR Codes
     """
 
-    def __init__(self):
-
     def detect(self, image):
-        # INIT TODO
         # convert the image to grayscale
-	    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
         # compute the Scharr gradient magnitude representation of the images
         # in both the x and y direction using OpenCV 2.4
-        ddepth=cv2.cv.CV_32F if imutils.is_cv2() else cv2.CV_32F
+        if imutils.is_cv2():
+            ddepth=cv2.cv.CV_32F 
+        else:
+            cv2.CV_32F
+
         gradX=cv2.Sobel(gray, ddepth = ddepth, dx = 1, dy = 0, ksize = -1)
         gradY=cv2.Sobel(gray, ddepth = ddepth, dx = 0, dy = 1, ksize = -1)
        
@@ -62,7 +63,7 @@ class QRDetection:
         return box
 
     def run(self):
-        # INIT TODO
+        detect()
 
 if __name__ == "__main__":
     QRDetection().run()
