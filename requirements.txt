@@ -7,3 +7,6 @@ imutils
 consolemenu
 console-menu
 pybluez
+pyzbar
+cmake
+opencv-python
