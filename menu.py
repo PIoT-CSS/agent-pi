@@ -34,6 +34,8 @@ def action(name):
         if auth.authenticate_facialrecognition(username):
             Screen().input("Waiting for camera to take picture")
     elif name == 'EngineerBT':
+        pub = Publisher()
+        pub.publish("Requesting engineers' Bluetooth MAC addresses", 'MAC')
         if BluetoothUnlocker().search_and_unlock():
             Screen().input('The car has been unlocked, '
                 + 'press [enter] to continue.')

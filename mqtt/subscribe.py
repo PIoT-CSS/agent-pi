@@ -18,6 +18,8 @@ in_hash_md5 = hashlib.md5()
 DATASET_FOLDER = "./utility/facialrecognition/dataset"
 DATASET_EXTENSION = ".jpg"
 
+MAC_ADDR_FILE = "utility/mac_addresses.json"
+
 BROKER_AGENT_IP = str(os.getenv("AGENT_IP"))
 PORT = int(os.getenv("PORT"))
 
@@ -35,6 +37,7 @@ class Subscriber:
         self.AUTH_RESP_FR_TOPIC = "AUTH/RESP/FR"
         self.AUTH_RESP_UP_TOPIC = "AUTH/RESP/UP"
         self.RETURN_TOPIC = "RETURN"
+        self.MAC_ADDR_RESP_TOPIC = 'REQ/RESP/MAC_ADDR'
         self.broker_address = BROKER_AGENT_IP
         self.port = PORT
         self.USERNAME = "test"
@@ -59,6 +62,7 @@ class Subscriber:
             client.subscribe(self.AUTH_RESP_FR_TOPIC)
             client.subscribe(self.AUTH_RESP_UP_TOPIC)
             client.subscribe(self.RETURN_TOPIC)
+            client.subscribe(self.MAC_ADDR_RESP_TOPIC)
         else:
             print("connection error, returned code=", rc)
 
@@ -109,6 +113,10 @@ class Subscriber:
                     print('RETURNED CAR')
                 else:
                     print("RETURN CAR DENIED")
+            elif msg.topic == self.MAC_ADDR_RESP_TOPIC:
+                mac_addresses = json.loads(payload)
+                with open(MAC_ADDR_FILE, 'w') as mac_file:
+                    json.dump(mac_addresses, mac_file)
 
     def process_message(self, msg):
         """
