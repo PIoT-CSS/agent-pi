@@ -37,7 +37,8 @@ def action(name):
         if BluetoothUnlocker().search_and_unlock():
             Screen().input('The car has been unlocked, '
                 + 'press [enter] to continue.')
-            
+            vs = VideoStream()
+            vs.stream('Engineer','qr')
         else:
             Screen().input('The car failed to unlock, '
                 + 'press [enter] to continue.')
