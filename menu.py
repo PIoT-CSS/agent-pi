@@ -37,6 +37,7 @@ def action(name):
         if BluetoothUnlocker().search_and_unlock():
             Screen().input('The car has been unlocked, '
                 + 'press [enter] to continue.')
+            
         else:
             Screen().input('The car failed to unlock, '
                 + 'press [enter] to continue.')
