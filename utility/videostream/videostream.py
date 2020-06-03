@@ -19,8 +19,8 @@ from pyzbar import pyzbar
 # construct the argument parse and parse the argument
 ap = argparse.ArgumentParser()
 ap.add_argument("-o", "--output", type=str, default="barcode.csv",
-    help="/videostream/barcode.csv")
-args= vars(ap.parse_args())
+                help="/videostream/barcode.csv")
+args = vars(ap.parse_args())
 
 # location for saving images
 INPUT_FOLDER = os.path.abspath(
@@ -69,7 +69,7 @@ class VideoStream():
 
                 cv2.imshow("Frame", frame)
                 cv2.waitKey(0)
-                
+
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
             elif purpose == "facialrecognition":
