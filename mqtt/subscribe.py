@@ -114,7 +114,9 @@ class Subscriber:
                 else:
                     print("RETURN CAR DENIED")
             elif msg.topic == self.MAC_ADDR_RESP_TOPIC:
+                # load payload as json
                 mac_addresses = json.loads(payload)
+                # dump payload into MAC_ADDR_FILE json file
                 with open(MAC_ADDR_FILE, 'w') as mac_file:
                     json.dump(mac_addresses, mac_file)
 
