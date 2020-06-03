@@ -13,14 +13,14 @@ import cv2
 import face_recognition
 import os
 import time
-import datetime
+import json
 from qrdetection import QRDetection
 from pyzbar import pyzbar
 
 # construct the argument parse and parse the argument
 ap = argparse.ArgumentParser()
-ap.add_argument("-o", "--output", type=str, default="barcode.csv",
-                help="/videostream/barcode.csv")
+ap.add_argument("-o", "--output", type=str, default="barcode.json",
+                help="/videostream/barcode.json")
 args = vars(ap.parse_args())
 
 # location for saving images
@@ -57,39 +57,32 @@ class VideoStream():
 
             if purpose == "qrdetect":
                 # Open CSV to save details from QR Code
-                csv = open(args["output"], "w")
+                outfile = open(args["output"], "w")
                 found = set()
                 barcodes = pyzbar.decode(frame)
 
                 # Detect QR Code
                 qr = QRDetection()
-                box = qr.detect(frame)
-                if box is not None:
-                    cv2.drawContours(frame, [box], -1, (0, 255, 0), 2)
-
-                # if True:
-                #     # scan = qr.qr_read(frame, barcodes)
-                #     # loop over the detected barcodes
-                #     for barcode in barcodes:
-                #         # extract the bounding box location of the barcode and draw
-                #         # the bounding box surrounding the barcode on the image
-                #         (x, y, w, h) = barcode.rect
-                #         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
-                #         # the barcode data is a bytes object so if we want to draw it
-                #         # on our output image we need to convert it to a string first
-                #         barcodeData = barcode.data.decode("utf-8")
-                #         barcodeType = barcode.type
-                #         # draw the barcode data and barcode type on the image
-                #         text = "{} ({})".format(barcodeData, barcodeType)
-                #         cv2.putText(frame, text, (x, y - 10),
-                #             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-                #         # if the barcode text is currently not in our CSV file, write
-                #         # the timestamp + barcode to disk and update the set
-                #         if barcodeData not in found:
-                #             csv.write("{},{}\n".format(datetime.datetime.now(),
-                #                 barcodeData))
-                #             csv.flush()
-                #             found.add(barcodeData)
+                if True:
+                     for barcode in barcodes:
+                         # extract the bounding box location of the barcode and draw
+                         # the bounding box surrounding the barcode on the image
+                         (x, y, w, h) = barcode.rect
+                         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                         # the barcode data is a bytes object so if we want to draw it
+                         # on our output image we need to convert it to a string first
+                         barcodeData = barcode.data.decode("utf-8")
+                         barcodeType = barcode.type
+                         # draw the barcode data and barcode type on the image
+                         text = "{} ({})".format(barcodeData, barcodeType)
+                         cv2.putText(frame, text, (x, y - 10),
+                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+                         # if the barcode text is currently not in our CSV file, write
+                         # the timestamp + barcode to disk and update the set
+                         if barcodeData not in found:
+                             print(barcodeData)
+                             json.dump(barcodeData, outfile) 
+                             found.add(barcodeData)
 
                 cv2.imshow("Frame", frame)
 
