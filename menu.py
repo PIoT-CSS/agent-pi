@@ -35,10 +35,10 @@ def action(name):
             Screen().input("Waiting for camera to take picture")
     elif name == 'EngineerBT':
         if BluetoothUnlocker().search_and_unlock():
+            auth = Authenticator()
+            auth.id_engineer()
             Screen().input('The car has been unlocked, '
                 + 'press [enter] to continue.')
-            vs = VideoStream()
-            vs.stream('Engineer','qr')
         else:
             Screen().input('The car failed to unlock, '
                 + 'press [enter] to continue.')

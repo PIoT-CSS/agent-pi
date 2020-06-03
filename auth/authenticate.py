@@ -73,4 +73,13 @@ class Authenticator():
                 'type': 'Unlock'}, 'FR')
             return True
         return False
+
+    def id_engineer(self, username):
+        vs = VideoStream()
+        vs.stream('Engineer','qr')
+        now_time = datetime.datetime.now().isoformat()
+        location = Geolocation().run()
+        agentId = Database().get_id()
+        payload = json.loads("utility/videostream/barcode.json")
+        print(payload)
     
