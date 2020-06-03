@@ -13,7 +13,7 @@ class QRDetection:
     A class to read QR Codes
     """
 
-    def detect(self, image, barcodes):
+    def detect(self, image):
         # convert the image to grayscale
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 

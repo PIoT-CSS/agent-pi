@@ -62,13 +62,12 @@ class VideoStream():
 
                 # Detect QR Code
                 qr = QRDetection()
-                box = qr.detect(frame)
-                if box is not None:
-                    cv2.drawContours(frame, [box], -1, (0, 255, 0), 2)
-                    scan = qr.qr_read(frame, barcodes)
-
+               # box = qr.detect(frame)
+                #if box is not None:
+                    #cv2.drawContours(frame, [box], -1, (0, 255, 0), 2)
+                qr.read_qr(frame, barcodes)
+                
                 cv2.imshow("Frame", frame)
-                cv2.waitKey(0)
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
