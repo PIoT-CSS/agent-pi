@@ -7,13 +7,12 @@ QRDetection.py module, its functionality is involved in detecting the Engineers 
 
 """
 
-
 class QRDetection:
     """
     A class to read QR Codes
     """
 
-    def detect(self, image):
+    def detect(self, image, barcodes):
         # convert the image to grayscale
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -61,6 +60,32 @@ class QRDetection:
         
         # return the bounding box of the barcode
         return box
+
+    def read_qr(self, image, barcodes):
+        for barcode in barcodes:
+            # extract the bounding box location of the barcode and draw the
+            # bounding box surrounding the barcode on the image
+            (x, y, w, h) = barcode.rect
+            cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
+
+            # the barcode data is a bytes object so if we want to draw it on
+            # our output image we need to convert it to a string first
+            barcodeData = barcode.data.decode("utf-8")
+            barcodeType = barcode.type
+
+            # draw the barcode data and barcode type on the image
+            text = "{} ({})".format(barcodeData, barcodeType)
+            cv2.putText(image, text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX,
+                0.5, (0, 0, 255), 2)
+
+            if barcodeData not in found:
+                csv.write("{},{}\n".format(datetime.datetime.now(),
+				    barcodeData))
+			    csv.flush()
+			    found.add(barcodeData)
+
+            # print the barcode type and data to the terminal
+            print("[INFO] Found {} barcode: {}".format(barcodeType, barcodeData))
 
     def run(self):
         detect()

@@ -14,6 +14,14 @@ import face_recognition
 import os
 import time
 from qrdetection import QRDetection
+from pyzbar import pyzbar
+
+# construct the argument parse and parse the argument
+ap = argparse.ArgumentParser()
+ap.add_argument("-o", "--output", type=str, default="barcode.csv",
+    help="/videostream/barcode.csv")
+args= vars(ap.parse_args())
+
 # location for saving images
 INPUT_FOLDER = os.path.abspath(
     os.path.join(
@@ -47,14 +55,21 @@ class VideoStream():
             rgb_frame = frame[:, :, ::-1]
 
             if purpose == "qrdetect":
+                # Open CSV to save details from QR Code
+                csv = open(args["output"], "w")
+                found = set()
+                barcodes = pyzbar.decode(frame)
+
                 # Detect QR Code
                 qr = QRDetection()
                 box = qr.detect(frame)
                 if box is not None:
                     cv2.drawContours(frame, [box], -1, (0, 255, 0), 2)
+                    scan = qr.qr_read(frame, barcodes)
 
                 cv2.imshow("Frame", frame)
-
+                cv2.waitKey(0)
+                
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
             elif purpose == "facialrecognition":
