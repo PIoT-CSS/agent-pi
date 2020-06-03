@@ -27,7 +27,7 @@ class VideoStream():
     A class containing method to save picture captured by webcam.
     """
 
-    def stream(self, username, type):
+    def stream(self, username, purpose):
         """
         created a *threaded* video stream, allow the camera sensor to warmup,
         and start the FPS counter. Displays the webcam when needed, captures
@@ -46,14 +46,10 @@ class VideoStream():
 
             rgb_frame = frame[:, :, ::-1]
 
-            if frame is None:
-                break
-
-            # Detect QR Code
-            qr = QRDetector()
-            box = qr.detect(frame)
-
-            if type == "qrdetect":
+            if purpose == "qrdetect":
+                # Detect QR Code
+                qr = QRDetection()
+                box = qr.detect(frame)
                 if box is not None:
                     cv2.drawContours(frame, [box], -1, (0, 255, 0), 2)
 
@@ -61,7 +57,7 @@ class VideoStream():
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
-            elif type == "facialrecognition":
+            elif purpose == "facialrecognition":
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     path = "{}/{}.jpg".format(INPUT_FOLDER, username)
                     cv2.imwrite(path, frame)
