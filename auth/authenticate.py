@@ -77,13 +77,10 @@ class Authenticator():
     def id_engineer(self):
         vs = VideoStream()
         vs.stream('Engineer','qr')
-        now_time = datetime.datetime.now().isoformat()
-        location = Geolocation().run()
-        agentId = Database().get_id()
         payload = json.loads("utility/videostream/barcode.json")
         if payload:
             pub = Publisher()
-            pub.publish(json.dumps(payload))
+            pub.publish(json.dumps(payload), 'ENG')
             return True
         else:
             return False

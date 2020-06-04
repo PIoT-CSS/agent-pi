@@ -96,3 +96,6 @@ class Publisher:
         elif topic == 'MAC':
             client.publish(self.MAC_ADDR_REQ_TOPIC, json.dumps(payload))
             client.disconnect()
+        elif topic == 'ENG':
+            client.publish(self.MAC_ADDR_REQ_TOPIC, json.dumps(payload))
+            client.disconnect()
