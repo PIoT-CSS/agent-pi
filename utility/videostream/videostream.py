@@ -3,11 +3,10 @@ videostream.py module, it's job is to start the camera in a thread
 allowing it to warm up.
 """
 from __future__ import print_function
-# from .webcamvideostream import WebcamVideoStream
-# from .fps import FPS
+#from .webcamvideostream import WebcamVideoStream
+#from .fps import FPS
 from webcamvideostream import WebcamVideoStream
 from fps import FPS
-import argparse
 import imutils
 import cv2
 import face_recognition
@@ -15,12 +14,15 @@ import os
 import time
 import datetime
 from pyzbar import pyzbar
+import json
+import argparse
 
 # construct the argument parse and parse the argument
 ap = argparse.ArgumentParser()
-ap.add_argument("-o", "--output", type=str, default="barcode.csv",
-                help="/videostream/barcode.csv")
+ap.add_argument("-o", "--output", type=str, default="barcode.json",
+                help="/videostream/barcode.json")
 args = vars(ap.parse_args())
+
 
 # location for saving images
 INPUT_FOLDER = os.path.abspath(
@@ -54,7 +56,7 @@ class VideoStream():
 
             if purpose == "qrdetect":
                 # Open CSV to save details from QR Code
-                csv = open(args["output"], "w")
+                outfile = open(args["output"], "w")
                 found = set()
                 barcodes = pyzbar.decode(frame)
 
@@ -74,9 +76,7 @@ class VideoStream():
                     # if the barcode text is currently not in our CSV file, write
                     # the timestamp + barcode to disk and update the set
                     if barcodeData not in found:
-                        csv.write("{},{}\n".format(datetime.datetime.now(),
-                            barcodeData))
-                        csv.flush()
+                        json.dump(barcodeData, outfile)
                         found.add(barcodeData)
 
                 cv2.imshow("Frame", frame)
