@@ -77,17 +77,16 @@ class Authenticator():
     def id_engineer(self):
         vs = VideoStream()
         vs.stream('Engineer','qr')
-        print("[DEBUG] Engineer VideoStream")
-        #now_time = datetime.datetime.now().isoformat()
-        #location = Geolocation().run()
-        #agentId = Database().get_id()
-        #payload = json.loads("utility/videostream/barcode.json")
-       # if payload:
-        #    pub = Publisher()
-         #   pub.publish(json.dumps(payload))
-          #  return True
-       # else:
-        #    return False
+        now_time = datetime.datetime.now().isoformat()
+        location = Geolocation().run()
+        agentId = Database().get_id()
+        payload = json.loads("utility/videostream/barcode.json")
+       if payload:
+           pub = Publisher()
+           pub.publish(json.dumps(payload))
+           return True
+       else:
+           return False
    
 if __name__ == "__main__":
     Authenticator().id_engineer()
