@@ -92,3 +92,6 @@ class Authenticator():
             return True
         else:
             return False
+
+if __name__ == "__main__":
+    print(QRCODE_PATH)
