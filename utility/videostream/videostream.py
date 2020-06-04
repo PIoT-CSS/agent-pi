@@ -14,7 +14,6 @@ import face_recognition
 import os
 import time
 import datetime
-from qrdetection import QRDetection
 from pyzbar import pyzbar
 
 # construct the argument parse and parse the argument
