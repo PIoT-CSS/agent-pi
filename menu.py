@@ -35,11 +35,11 @@ def action(name):
             Screen().input("Waiting for camera to take picture")
     elif name == 'EngineerBT':
         # publish request to MP, requesting for engineers' Bluetooth MAC addr
-        pub = Publisher()
-        pub.publish("Requesting engineers' Bluetooth MAC addresses", 'MAC')
-        if BluetoothUnlocker().search_and_unlock():
-            auth = Authenticator()
-            if auth.id_engineer():
+        #pub = Publisher()
+        #pub.publish("Requesting engineers' Bluetooth MAC addresses", 'MAC')
+        #if BluetoothUnlocker().search_and_unlock():
+        auth = Authenticator()
+        if auth.id_engineer():
                 Screen().input('The car has been unlocked, '
                                + 'press [enter] to continue.')
         else:
