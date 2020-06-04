@@ -19,7 +19,7 @@ import argparse
 
 # construct the argument parse and parse the argument
 ap = argparse.ArgumentParser()
-ap.add_argument("-o", "--output", type=str, default="/videostream/qrcode.json",
+ap.add_argument("-o", "--output", type=str, default="qrcode.json",
                 help="/videostream/qrcode.json")
 args = vars(ap.parse_args())
 
