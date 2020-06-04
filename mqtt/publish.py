@@ -28,6 +28,7 @@ class Publisher:
         self.AUTH_UP_TOPIC = "AUTH/UP"
         self.RETURN_TOPIC = "RETURN"
         self.MAC_ADDR_REQ_TOPIC = "REQ/MAC_ADDR"
+        self.ENG_TOPIC = 'ENG'
         self.BROKER_ADDRESS = BROKER_MASTER_IP
         self.BROKER_PORT = PORT
 
@@ -97,5 +98,5 @@ class Publisher:
             client.publish(self.MAC_ADDR_REQ_TOPIC, json.dumps(payload))
             client.disconnect()
         elif topic == 'ENG':
-            client.publish(self.MAC_ADDR_REQ_TOPIC, json.dumps(payload))
+            client.publish(self.ENG_TOPIC, json.dumps(payload))
             client.disconnect()

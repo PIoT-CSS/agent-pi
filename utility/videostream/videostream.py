@@ -17,12 +17,6 @@ from pyzbar import pyzbar
 import json
 import argparse
 
-# construct the argument parse and parse the argument
-ap = argparse.ArgumentParser()
-ap.add_argument("-o", "--output", type=str, default="qrcode.json",
-                help="/videostream/qrcode.json")
-args = vars(ap.parse_args())
-
 
 # location for saving images
 INPUT_FOLDER = os.path.abspath(
@@ -56,7 +50,6 @@ class VideoStream():
 
             if purpose == "qr":
                 # Open CSV to save details from QR Code
-                outfile = open(args["output"], "w")
                 found = set()
                 barcodes = pyzbar.decode(frame)
 
@@ -76,8 +69,9 @@ class VideoStream():
                     # if the barcode text is currently not in our CSV file, write
                     # the timestamp + barcode to disk and update the set
                     if barcodeData not in found:
-                        json.dump(barcodeData, outfile)
-                        found.add(barcodeData)
+                        with open('qrcode.json', 'w') as outfile:
+                            json.dump(barcodeData, outfile)
+                            found.add(barcodeData)
 
                 cv2.imshow("Frame", frame)
                 fps.update()
@@ -104,4 +98,4 @@ class VideoStream():
 
 
 if __name__ == "__main__":
-    VideoStream().stream('linh', 'qrdetect')
+    VideoStream().stream('linh', 'qr')

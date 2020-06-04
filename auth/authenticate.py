@@ -14,10 +14,7 @@ import os
 import json
 
 # location for saving images
-QRCODE_PATH = os.path.abspath(
-    os.path.join(
-        os.path.dirname(__file__),
-        '../utility/videostream/qrcode.json'))
+QRCODE_PATH = './qrcode.json'
 
 # Pickle Extension
 PICKLE_EXTENSION = '.pickle'
@@ -85,13 +82,22 @@ class Authenticator():
     def id_engineer(self):
         vs = VideoStream()
         vs.stream('Engineer','qr')
-        payload = json.loads(QRCODE_PATH)
+        with open(QRCODE_PATH) as payload:
+            print(payload)
+            if len(payload.readlines()) != 0:
+                payload.seek(0)
+                payloadData = json.load(payload)
+                print(payloadData)
+            else:
+                print("Empty")
         if payload:
             pub = Publisher()
-            pub.publish(json.dumps(payload), 'ENG')
+            pub.publish(payloadData, 'ENG')
+            print('Published')
             return True
         else:
             return False
 
 if __name__ == "__main__":
     print(QRCODE_PATH)
+    Authenticator().id_engineer()
