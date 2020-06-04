@@ -81,5 +81,10 @@ class Authenticator():
         location = Geolocation().run()
         agentId = Database().get_id()
         payload = json.loads("utility/videostream/barcode.json")
-        print(payload)
+        if payload:
+            pub = Publisher()
+            pub.publish(json.dumps(payload))
+            return True
+        else:
+            return False
     
