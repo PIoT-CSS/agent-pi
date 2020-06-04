@@ -41,10 +41,10 @@ def action(name):
             auth = Authenticator()
             if auth.id_engineer():
                 Screen().input('The car has been unlocked, '
-                    + 'press [enter] to continue.')
+                               + 'press [enter] to continue.')
         else:
             Screen().input('The car failed to unlock, '
-                + 'press [enter] to continue.')
+                           + 'press [enter] to continue.')
     elif name == 'Return':
         print("\nReturning the car")
         username = Screen().input('Enter in Username: ')
@@ -91,7 +91,7 @@ def main():
                              action, args={
                                  "FaceRecog"}, should_exit=True)
     unlock_engineer_bt = FunctionItem("Unlock with engineer's Bluetooth device",
-                        action, args={"EngineerBT"}, should_exit=True)
+                                      action, args={"EngineerBT"}, should_exit=True)
     unlockcar_submenu.append_item(unlock_pw)
     unlockcar_submenu.append_item(unlock_fr)
     unlockcar_submenu.append_item(unlock_engineer_bt)
@@ -114,6 +114,7 @@ def main():
 
     # Show the menu
     menu.show()
+
 
 if __name__ == "__main__":
     try:
