@@ -10,8 +10,15 @@ from utility.videostream.videostream import VideoStream
 from data.database import Database
 import pickle
 import time
-sys.path.append('..')
+import os
 
+# location for saving images
+QRCODE_PATH = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__),
+        '../utility/videostream/qrcode.json'))
+
+# Pickle Extension
 PICKLE_EXTENSION = '.pickle'
 class Authenticator():
     """
@@ -77,13 +84,10 @@ class Authenticator():
     def id_engineer(self):
         vs = VideoStream()
         vs.stream('Engineer','qr')
-        payload = json.loads("utility/videostream/barcode.json")
+        payload = json.loads(QRCODE_PATH)
         if payload:
             pub = Publisher()
             pub.publish(json.dumps(payload), 'ENG')
             return True
         else:
             return False
-   
-if __name__ == "__main__":
-    Authenticator().id_engineer()
