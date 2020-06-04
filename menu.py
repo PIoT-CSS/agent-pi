@@ -34,14 +34,14 @@ def action(name):
         if auth.authenticate_facialrecognition(username):
             Screen().input("Waiting for camera to take picture")
     elif name == 'EngineerBT':
-        if BluetoothUnlocker().search_and_unlock():
-            auth = Authenticator()
-            auth.id_engineer()
-            Screen().input('The car has been unlocked, '
-                + 'press [enter] to continue.')
-        else:
-            Screen().input('The car failed to unlock, '
-                + 'press [enter] to continue.')
+        #if BluetoothUnlocker().search_and_unlock():
+        auth = Authenticator()
+        auth.id_engineer()
+           # Screen().input('The car has been unlocked, '
+            #    + 'press [enter] to continue.')
+        #else:
+         #   Screen().input('The car failed to unlock, '
+          #      + 'press [enter] to continue.')
     elif name == 'Return':
         print("\nReturning the car")
         username = Screen().input('Enter in Username: ')

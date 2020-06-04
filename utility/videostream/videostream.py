@@ -3,10 +3,10 @@ videostream.py module, it's job is to start the camera in a thread
 allowing it to warm up.
 """
 from __future__ import print_function
-#from .webcamvideostream import WebcamVideoStream
-#from .fps import FPS
-from webcamvideostream import WebcamVideoStream
-from fps import FPS
+from .webcamvideostream import WebcamVideoStream
+from .fps import FPS
+#from webcamvideostream import WebcamVideoStream
+#from fps import FPS
 import imutils
 import cv2
 import face_recognition
@@ -54,7 +54,7 @@ class VideoStream():
             frame = vs.read()
             frame = imutils.resize(frame, width=400)
 
-            if purpose == "qrdetect":
+            if purpose == "qr":
                 # Open CSV to save details from QR Code
                 outfile = open(args["output"], "w")
                 found = set()
@@ -83,7 +83,7 @@ class VideoStream():
                 fps.update()
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
-            elif purpose == "facialrecognition":
+            elif purpose == "fr":
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     path = "{}/{}.jpg".format(INPUT_FOLDER, username)
                     cv2.imwrite(path, frame)
