@@ -11,6 +11,7 @@ from data.database import Database
 import pickle
 import time
 import os
+import json
 
 # location for saving images
 QRCODE_PATH = os.path.abspath(
