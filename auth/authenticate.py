@@ -93,7 +93,6 @@ class Authenticator():
         if payload:
             pub = Publisher()
             pub.publish(payloadData, 'ENG')
-            print('Published')
             return True
         else:
             return False

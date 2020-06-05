@@ -28,14 +28,14 @@ fps = FPS().start()
 
 class VideoStream():
     """
-    A class containing method to save picture captured by webcam.
+    A class containing method to save picture captured by webcam, & qrdetection
     """
 
     def stream(self, username, purpose):
         """
         created a *threaded* video stream, allow the camera sensor to warmup,
         and start the FPS counter. Displays the webcam when needed, captures
-        a picture and saves it.
+        a picture and saves it or can detect the qrcode, read the data from it and saves it.
 
         :param username: isername that's using the camera
         :type username: string
