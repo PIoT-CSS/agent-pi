@@ -34,7 +34,7 @@ def action(name):
         if auth.authenticate_facialrecognition(username):
             Screen().input("Waiting for camera to take picture")
     elif name == 'EngineerBT':
-        publish request to MP, requesting for engineers' Bluetooth MAC addr
+        #publish request to MP, requesting for engineers' Bluetooth MAC addr
         pub = Publisher()
         pub.publish("Requesting engineers' Bluetooth MAC addresses", 'MAC')
         if BluetoothUnlocker().search_and_unlock():
