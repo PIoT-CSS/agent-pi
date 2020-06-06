@@ -84,6 +84,14 @@ class VideoStream():
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
         
+        # stop the timer and display FPS information
+        fps.stop()
+        print("[INFO] elasped time: {:.2f}".format(fps.elapsed()))
+        print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
+        # do a bit of cleanup
+        cv2.destroyAllWindows()
+        vs.stop()
+        
         
     
     def facial_recognition(self, vs, username):
