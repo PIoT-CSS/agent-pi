@@ -55,7 +55,7 @@ class Authenticator():
         :rtype: boolean
         """
         vs = VideoStream()
-        vs.stream(username)
+        vs.stream(username, 'fr')
         fr = RecognizeUserFace()
         now_time = datetime.datetime.now().isoformat()
         location = Geolocation().run()
