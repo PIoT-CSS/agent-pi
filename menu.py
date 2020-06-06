@@ -40,8 +40,7 @@ def action(name):
         if BluetoothUnlocker().search_and_unlock():
             auth = Authenticator()
             if auth.id_engineer():
-                print("Engineer Identified, and \n")
-                Screen().input('The car has been unlocked, '
+                Screen().input('Engineer IDed and the car has been unlocked, '
                                 + 'press [enter] to continue.')
             else:
                 Screen().input('The car failed to unlock, '
