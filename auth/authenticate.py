@@ -92,6 +92,7 @@ class Authenticator():
             if payload:
                 pub = Publisher()
                 pub.publish(payloadData, 'ENG')
+                os.remove(QRCODE_PATH)
                 return True
             else:
                 return False
