@@ -39,13 +39,13 @@ def action(name):
         pub.publish("Requesting engineers' Bluetooth MAC addresses", 'MAC')
         if BluetoothUnlocker().search_and_unlock():
             auth = Authenticator()
-        if auth.id_engineer():
-            print("Engineer Identified, and \n")
-            Screen().input('The car has been unlocked, '
-                               + 'press [enter] to continue.')
-        else:
-            Screen().input('The car failed to unlock, '
-                           + 'press [enter] to continue.')
+            if auth.id_engineer():
+                print("Engineer Identified, and \n")
+                Screen().input('The car has been unlocked, '
+                                + 'press [enter] to continue.')
+            else:
+                Screen().input('The car failed to unlock, '
+                                + 'press [enter] to continue.')
     elif name == 'Return':
         print("\nReturning the car")
         username = Screen().input('Enter in Username: ')
