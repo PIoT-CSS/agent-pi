@@ -82,7 +82,7 @@ class VideoStream():
             cv2.imshow("Frame", frame)
             fps.update()
             if cv2.waitKey(1) & 0xFF == ord('q'):
-                return True
+                break
         
         
     
