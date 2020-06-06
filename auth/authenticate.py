@@ -61,6 +61,7 @@ class Authenticator():
         location = Geolocation().run()
         agentId = Database().get_id()
         if fr.run(username):
+            print(agentId)
             pub = Publisher()
             pub.publish({'username': username, 'timestamp': now_time, 
                 'location': location, 'agentid':agentId,

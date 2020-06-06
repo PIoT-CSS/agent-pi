@@ -3,6 +3,11 @@ module contains function to get device id.
 """
 import sqlite3
 import uuid
+import os
+DATABASE_PATH = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__),
+        '../data/rbpi-rmit-iot.db'))
 
 class Database:
     """
@@ -18,7 +23,8 @@ class Database:
         :return: ID
         :rtype: string
         """
-        conn = sqlite3.connect('./rbpi-rmit-iot.db')
+        print(DATABASE_PATH)
+        conn = sqlite3.connect(DATABASE_PATH)
         c = conn.cursor()
         c.execute("CREATE TABLE IF NOT EXISTS info (id TEXT PRIMARY KEY)")
 
