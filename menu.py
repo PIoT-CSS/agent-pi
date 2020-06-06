@@ -32,7 +32,8 @@ def action(name):
         username = Screen().input('Enter in Username: ')
         auth = Authenticator()
         if auth.authenticate_facialrecognition(username):
-            Screen().input("Waiting for camera to take picture")
+            Screen().input('The car has been unlocked, '
+                + 'press [enter] to continue.')
     elif name == 'EngineerBT':
         # publish request to MP, requesting for engineers' Bluetooth MAC addr
         pub = Publisher()
