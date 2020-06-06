@@ -80,21 +80,21 @@ class Authenticator():
         :rtype: boolean
         """
         vs = VideoStream()
-        vs.stream('Engineer','qr')
-        with open(QRCODE_PATH) as payload:
-            print(payload)
-            if len(payload.readlines()) != 0:
-                payload.seek(0)
-                payloadData = json.load(payload)
-                print(payloadData)
+        if vs.stream('Engineer','qr'):
+            with open(QRCODE_PATH) as payload:
+                print(payload)
+                if len(payload.readlines()) != 0:
+                    payload.seek(0)
+                    payloadData = json.load(payload)
+                    print(payloadData)
+                else:
+                        print("Empty")
+            if payload:
+                pub = Publisher()
+                pub.publish(payloadData, 'ENG')
+                return True
             else:
-                print("Empty")
-        if payload:
-            pub = Publisher()
-            pub.publish(payloadData, 'ENG')
-            return True
-        else:
-            return False
+                return False
 
 if __name__ == "__main__":
     print(QRCODE_PATH)
