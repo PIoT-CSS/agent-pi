@@ -38,7 +38,7 @@ def action(name):
         pub = Publisher()
         pub.publish("Requesting engineers' Bluetooth MAC addresses", 'MAC')
         if BluetoothUnlocker().search_and_unlock():
-        auth = Authenticator()
+            auth = Authenticator()
         if auth.id_engineer():
             print("Engineer Identified, and \n")
             Screen().input('The car has been unlocked, '
