@@ -37,7 +37,7 @@ class VideoStream():
         and start the FPS counter. Displays the webcam when needed, captures
         a picture and saves it or can detect the qrcode, read the data from it and saves it.
 
-        :param username: isername that's using the camera
+        :param username: username that's using the camera
         :type username: string
         """
         vs = WebcamVideoStream(src=0).start()
@@ -48,6 +48,13 @@ class VideoStream():
             self.facial_recognition(vs, username)
 
     def qr_detect(self, vs):
+        """
+        playback stream, for the user to scan QRCode. The content of the QRCode is saved in json format,
+        and then close the stream. 
+
+        :param vs: videostream object
+        :type VideoStream: VideoStream
+        """
         # loop over some frames...this time using the threaded stream
         while True:
             # grab the frame from the threaded video stream and resize it
@@ -95,6 +102,15 @@ class VideoStream():
         
     
     def facial_recognition(self, vs, username):
+        """
+        playback stream, for the user to scan face. Save image users face for face recognition,
+        and then close the stream. 
+
+        :param vs: videostream object
+        :type VideoStream: VideoStream
+        :param username: username that's using the camera
+        :type username: string
+        """
         # loop over some frames...this time using the threaded stream
         while True:
             # grab the frame from the threaded video stream and resize it
