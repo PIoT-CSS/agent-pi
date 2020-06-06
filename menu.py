@@ -18,7 +18,7 @@ import json
 def action(name):
     """
     determines whether to use password or facial
-    recognition for authenticating.
+    recognition for authenticating, or unlock via Bluetooth and make repairs
     """
     if name == 'UserPass':
         print("\nAuthenticating {}\n".format(name))
