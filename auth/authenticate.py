@@ -18,6 +18,7 @@ QRCODE_PATH = './qrcode.json'
 
 # Pickle Extension
 PICKLE_EXTENSION = '.pickle'
+
 class Authenticator():
     """
     Manages authentication using password and facial recognition.
@@ -42,7 +43,6 @@ class Authenticator():
                      'timestamp': now_time, 
                      'location': location}, 'UP')
         
-    
     def authenticate_facialrecognition(self, username):
         """
         If user chooses facial recognition, 
@@ -54,17 +54,6 @@ class Authenticator():
         :return: boolean
         :rtype: boolean
         """
-        #If exists, check if booked, then authenticate
-        pub = Publisher()
-        now_time = datetime.datetime.now().isoformat()
-        location = Geolocation().run()
-        agentId = Database().get_id()
-        pub.publish({'username': username, 'timestamp': now_time, 
-                     'location': location, 'agentid':agentId,
-                     'type': 'Encode Face'}, 'FR')
-        return True
-
-    def perform_facialrecognition(self, username):
         vs = VideoStream()
         vs.stream(username)
         fr = RecognizeUserFace()
@@ -80,6 +69,16 @@ class Authenticator():
         return False
 
     def id_engineer(self):
+        """
+        If user chooses facial recognition, 
+        it will request user picture from MP. user captures
+        their face, runs facial recognition module and returns True/False.
+
+        :param username: user name that's being authenticated
+        :type username: string
+        :return: boolean
+        :rtype: boolean
+        """
         vs = VideoStream()
         vs.stream('Engineer','qr')
         with open(QRCODE_PATH) as payload:
