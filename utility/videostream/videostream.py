@@ -43,9 +43,9 @@ class VideoStream():
         vs = WebcamVideoStream(src=0).start()
 
         if purpose == 'qr':
-            self.qr_detect(vs)
+            self.qr_detect(self.vs)
         elif purpose == 'fr':
-            self.facial_recognition(vs, username)
+            self.facial_recognition(self.vs, username)
 
     def qr_detect(self, vs):
         # loop over some frames...this time using the threaded stream
