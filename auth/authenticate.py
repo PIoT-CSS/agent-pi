@@ -80,7 +80,7 @@ class Authenticator():
         :rtype: boolean
         """
         vs = VideoStream()
-        vs.stream('Engineer','qr'):
+        vs.stream('Engineer','qr')
         with open(QRCODE_PATH) as payload:
             print(payload)
             if len(payload.readlines()) != 0:
