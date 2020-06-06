@@ -43,9 +43,9 @@ class VideoStream():
         vs = WebcamVideoStream(src=0).start()
 
         if purpose == 'qr':
-            self.qr_detect(self.vs)
+            self.qr_detect(vs)
         elif purpose == 'fr':
-            self.facial_recognition(self.vs, username)
+            self.facial_recognition(vs, username)
 
     def qr_detect(self, vs):
         # loop over some frames...this time using the threaded stream
@@ -84,13 +84,7 @@ class VideoStream():
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
         
-         # stop the timer and display FPS information
-        fps.stop()
-        print("[INFO] elasped time: {:.2f}".format(fps.elapsed()))
-        print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
-        # do a bit of cleanup
-        cv2.destroyAllWindows()
-        vs.stop()
+        
     
     def facial_recognition(self, vs, username):
         # loop over some frames...this time using the threaded stream
