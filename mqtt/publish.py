@@ -39,7 +39,7 @@ class Publisher:
         :param client: the client instance for this callback
         :type client: Client
         :param userdata: the private user data as set in Client()
-        or user_data_set()
+            or user_data_set()
         :type userdata: [type]
         :param result: Data being published
         :type result: String

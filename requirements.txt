@@ -10,3 +10,4 @@ pybluez
 pyzbar
 cmake
 opencv-python
+pytest

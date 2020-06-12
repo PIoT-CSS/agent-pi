@@ -4,6 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mqtt package &#8212; CarShare Application 1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -70,14 +71,12 @@ or user_data_set()</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>client</strong> (<em>Client</em>) – the client instance for this callback</p></li>
-<li><p><strong>userdata</strong> – the private user data as set in Client()</p></li>
+<li><p><strong>userdata</strong> (<em>[</em><em>type</em><em>]</em>) – the private user data as set in Client()
+or user_data_set()</p></li>
+<li><p><strong>result</strong> (<em>String</em>) – Data being published</p></li>
 </ul>
 </dd>
 </dl>
-<p>or user_data_set()
-:type userdata: [type]
-:param result: Data being published
-:type result: String</p>
 </dd></dl>
 
 <dl class="py method">
@@ -115,16 +114,13 @@ will be converted into json.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>client</strong> (<em>Client</em>) – the client instance for this callback</p></li>
-<li><p><strong>userdata</strong> – the private user data as</p></li>
+<li><p><strong>userdata</strong> (<em>any</em>) – the private user data as
+set in Client() or user_data_set()</p></li>
+<li><p><strong>flags</strong> (<em>dict</em>) – response flags sent by the broker</p></li>
+<li><p><strong>rc</strong> (<em>integer</em>) – result of connection</p></li>
 </ul>
 </dd>
 </dl>
-<p>set in Client() or user_data_set()
-:type userdata: any
-:param flags: response flags sent by the broker
-:type flags: dict
-:param rc: result of connection
-:type rc: integer</p>
 </dd></dl>
 
 <dl class="py method">
@@ -135,17 +131,14 @@ will be converted into json.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>client</strong> (<em>Client</em>) – the client instance for this callback</p></li>
-<li><p><strong>userdata</strong> – the private user data as set in Client() or</p></li>
+<li><p><strong>userdata</strong> (<em>any</em>) – the private user data as set in Client() or
+user_data_set()</p></li>
+<li><p><strong>level</strong> (<em>MQTT_LOG_INFO</em><em>, </em><em>MQTT_LOG_NOTICE</em><em>, </em><em>MQTT_LOG_WARNING</em><em>,
+</em><em>MQTT_LOG_ERR</em><em>, </em><em>MQTT_LOG_DEBUG</em>) – severity of the message</p></li>
+<li><p><strong>buf</strong> (<em>bytes</em>) – message buffer</p></li>
 </ul>
 </dd>
 </dl>
-<p>user_data_set()
-:type userdata: any
-:param level: severity of the message
-:type level: MQTT_LOG_INFO, MQTT_LOG_NOTICE, MQTT_LOG_WARNING,
-MQTT_LOG_ERR, MQTT_LOG_DEBUG
-:param buf: message buffer
-:type buf: bytes</p>
 </dd></dl>
 
 <dl class="py method">
@@ -158,15 +151,13 @@ recognition.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>client</strong> (<em>Client</em>) – the client instance for this callback</p></li>
-<li><p><strong>userdata</strong> – the private user data as set in Client()</p></li>
+<li><p><strong>userdata</strong> (<em>any</em>) – the private user data as set in Client()
+or user_data_set()</p></li>
+<li><p><strong>msg</strong> (<em>MQTTMessage</em>) – an instance of MQTTMessage. This is a class with members
+topic, payload, qos, retain.</p></li>
 </ul>
 </dd>
 </dl>
-<p>or user_data_set()
-:type userdata: any
-:param msg: an instance of MQTTMessage. This is a class with members
-topic, payload, qos, retain.
-:type msg: MQTTMessage</p>
 </dd></dl>
 
 <dl class="py method">
@@ -194,6 +185,68 @@ everything arrives succesfuly.</p>
 the client. connects to the address and starts loop.</p>
 </dd></dl>
 
+</dd></dl>
+
+</div>
+<div class="section" id="module-mqtt.test_mqtt">
+<span id="mqtt-test-mqtt-module"></span><h2>mqtt.test_mqtt module<a class="headerlink" href="#module-mqtt.test_mqtt" title="Permalink to this headline">¶</a></h2>
+<p>test_mqtt is for testing if mqtt protocol sends data properly</p>
+<dl class="py function">
+<dt id="mqtt.test_mqtt.on_connect">
+<code class="sig-prename descclassname">mqtt.test_mqtt.</code><code class="sig-name descname">on_connect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">userdata</span></em>, <em class="sig-param"><span class="n">flags</span></em>, <em class="sig-param"><span class="n">rc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.test_mqtt.on_connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if MQTT connection has been established.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<em>Client</em>) – the client instance for this callback</p></li>
+<li><p><strong>userdata</strong> (<em>any</em>) – the private user data as
+set in Client() or user_data_set()</p></li>
+<li><p><strong>flags</strong> (<em>dict</em>) – response flags sent by the broker</p></li>
+<li><p><strong>rc</strong> (<em>integer</em>) – result of connection</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mqtt.test_mqtt.on_disconnect">
+<code class="sig-prename descclassname">mqtt.test_mqtt.</code><code class="sig-name descname">on_disconnect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">userdata</span></em>, <em class="sig-param"><span class="n">flags</span></em>, <em class="sig-param"><span class="n">rc</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.test_mqtt.on_disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if MQTT connection has been terminated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<em>Client</em>) – the client instance for this callback</p></li>
+<li><p><strong>userdata</strong> (<em>any</em>) – the private user data as
+set in Client() or user_data_set()</p></li>
+<li><p><strong>flags</strong> (<em>dict</em>) – response flags sent by the broker</p></li>
+<li><p><strong>rc</strong> (<em>integer</em>) – result of connection</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mqtt.test_mqtt.on_message">
+<code class="sig-prename descclassname">mqtt.test_mqtt.</code><code class="sig-name descname">on_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client</span></em>, <em class="sig-param"><span class="n">userdata</span></em>, <em class="sig-param"><span class="n">msg</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.test_mqtt.on_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode the payload and store it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<em>Client</em>) – the client instance for this callback</p></li>
+<li><p><strong>userdata</strong> (<em>any</em>) – the private user data as set in Client()
+or user_data_set()</p></li>
+<li><p><strong>msg</strong> (<em>MQTTMessage</em>) – an instance of MQTTMessage. This is a class with members
+topic, payload, qos, retain.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mqtt.test_mqtt.test_mqtt">
+<code class="sig-prename descclassname">mqtt.test_mqtt.</code><code class="sig-name descname">test_mqtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mqtt.test_mqtt.test_mqtt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test MQTT functions by connecting to broker, subscribing to topics
+and publish data to topics and then terminating the connection.</p>
 </dd></dl>
 
 </div>
@@ -228,6 +281,8 @@ the client. connects to the address and starts loop.</p>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">mqtt package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="startup.html">startup module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utility.html">utility package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utility.facialrecognition.html">utility.facialrecognition package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utility.videostream.html">utility.videostream package</a></li>
 </ul>
 </li>
 </ul>
@@ -269,7 +324,7 @@ the client. connects to the address and starts loop.</p>
       &copy;2020, Thang, Alex, Jiajun, Duy.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

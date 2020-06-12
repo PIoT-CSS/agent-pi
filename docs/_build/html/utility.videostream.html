@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>utility.videostream package &#8212; CarShare Application 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="utility.facialrecognition package" href="utility.facialrecognition.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="utility-videostream-package">
+<h1>utility.videostream package<a class="headerlink" href="#utility-videostream-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-utility.videostream.fps">
+<span id="utility-videostream-fps-module"></span><h2>utility.videostream.fps module<a class="headerlink" href="#module-utility.videostream.fps" title="Permalink to this headline">¶</a></h2>
+<p>fps.py module, finds out the frames per second that was captured.</p>
+<dl class="py class">
+<dt id="utility.videostream.fps.FPS">
+<em class="property">class </em><code class="sig-prename descclassname">utility.videostream.fps.</code><code class="sig-name descname">FPS</code><a class="headerlink" href="#utility.videostream.fps.FPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>a class to figure out fps.</p>
+<dl class="py method">
+<dt id="utility.videostream.fps.FPS.elapsed">
+<code class="sig-name descname">elapsed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utility.videostream.fps.FPS.elapsed" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the total number of seconds between the start and
+end interval</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>seconds</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>number</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.videostream.fps.FPS.fps">
+<code class="sig-name descname">fps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utility.videostream.fps.FPS.fps" title="Permalink to this definition">¶</a></dt>
+<dd><p>compute the (approximate) frames per second</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>fps</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.videostream.fps.FPS.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utility.videostream.fps.FPS.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>start the timer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>fps</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.videostream.fps.FPS.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utility.videostream.fps.FPS.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>stop the timer</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.videostream.fps.FPS.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utility.videostream.fps.FPS.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>increment the total number of frames examined during the
+start and end intervals</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-utility.videostream.videostream">
+<span id="utility-videostream-videostream-module"></span><h2>utility.videostream.videostream module<a class="headerlink" href="#module-utility.videostream.videostream" title="Permalink to this headline">¶</a></h2>
+<p>videostream.py module, it’s job is to start the camera in a thread
+allowing it to warm up.</p>
+<dl class="py class">
+<dt id="utility.videostream.videostream.VideoStream">
+<em class="property">class </em><code class="sig-prename descclassname">utility.videostream.videostream.</code><code class="sig-name descname">VideoStream</code><a class="headerlink" href="#utility.videostream.videostream.VideoStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class containing method to save picture captured by webcam, &amp; qrdetection</p>
+<dl class="py method">
+<dt id="utility.videostream.videostream.VideoStream.facial_recognition">
+<code class="sig-name descname">facial_recognition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vs</span></em>, <em class="sig-param"><span class="n">username</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.videostream.videostream.VideoStream.facial_recognition" title="Permalink to this definition">¶</a></dt>
+<dd><p>playback stream, for the user to scan face. Save image users face for face recognition,
+and then close the stream.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vs</strong> – videostream object</p></li>
+<li><p><strong>username</strong> (<em>string</em>) – username that’s using the camera</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.videostream.videostream.VideoStream.qr_detect">
+<code class="sig-name descname">qr_detect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.videostream.videostream.VideoStream.qr_detect" title="Permalink to this definition">¶</a></dt>
+<dd><p>playback stream, for the user to scan QRCode. The content of the QRCode is saved in json format,
+and then close the stream.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>vs</strong> – videostream object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.videostream.videostream.VideoStream.stream">
+<code class="sig-name descname">stream</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span></em>, <em class="sig-param"><span class="n">purpose</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.videostream.videostream.VideoStream.stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>created a <em>threaded</em> video stream, allow the camera sensor to warmup,
+and start the FPS counter. Displays the webcam when needed, captures
+a picture and saves it or can detect the qrcode, read the data from it and saves it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>username</strong> (<em>string</em>) – username that’s using the camera</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-utility.videostream.webcamvideostream">
+<span id="utility-videostream-webcamvideostream-module"></span><h2>utility.videostream.webcamvideostream module<a class="headerlink" href="#module-utility.videostream.webcamvideostream" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="utility.videostream.webcamvideostream.WebcamVideoStream">
+<em class="property">class </em><code class="sig-prename descclassname">utility.videostream.webcamvideostream.</code><code class="sig-name descname">WebcamVideoStream</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">src</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.videostream.webcamvideostream.WebcamVideoStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class that contains methods to manage the webcam.</p>
+<dl class="py method">
+<dt id="utility.videostream.webcamvideostream.WebcamVideoStream.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utility.videostream.webcamvideostream.WebcamVideoStream.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the frame stored by update.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.videostream.webcamvideostream.WebcamVideoStream.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utility.videostream.webcamvideostream.WebcamVideoStream.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>starts the thread</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.videostream.webcamvideostream.WebcamVideoStream.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utility.videostream.webcamvideostream.WebcamVideoStream.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>stop the webcam</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.videostream.webcamvideostream.WebcamVideoStream.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utility.videostream.webcamvideostream.WebcamVideoStream.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>runs a loop to update the frame stored. stops if stopped is true</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-utility.videostream">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utility.videostream" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">CarShare Application</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">agent-pi</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="auth.html">auth package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">data package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="menu.html">menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mqtt.html">mqtt package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="startup.html">startup module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="utility.html">utility package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utility.facialrecognition.html">utility.facialrecognition package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">utility.videostream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">agent-pi</a><ul>
+  <li><a href="utility.html">utility package</a><ul>
+      <li>Previous: <a href="utility.facialrecognition.html" title="previous chapter">utility.facialrecognition package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Thang, Alex, Jiajun, Duy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/utility.videostream.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

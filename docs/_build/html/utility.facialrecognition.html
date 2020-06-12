@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>utility.facialrecognition package &#8212; CarShare Application 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utility.videostream package" href="utility.videostream.html" />
+    <link rel="prev" title="utility package" href="utility.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="utility-facialrecognition-package">
+<h1>utility.facialrecognition package<a class="headerlink" href="#utility-facialrecognition-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-utility.facialrecognition.encode_one">
+<span id="utility-facialrecognition-encode-one-module"></span><h2>utility.facialrecognition.encode_one module<a class="headerlink" href="#module-utility.facialrecognition.encode_one" title="Permalink to this headline">¶</a></h2>
+<p>encode_one.py module, task is to encode images of a particular user.
+it will get images from the dataset and finds the specific folder
+that corresponds to the user.</p>
+<dl class="py class">
+<dt id="utility.facialrecognition.encode_one.EncodeOne">
+<em class="property">class </em><code class="sig-prename descclassname">utility.facialrecognition.encode_one.</code><code class="sig-name descname">EncodeOne</code><a class="headerlink" href="#utility.facialrecognition.encode_one.EncodeOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to encode images of a user.</p>
+<dl class="py method">
+<dt id="utility.facialrecognition.encode_one.EncodeOne.create_encodings_from_list">
+<code class="sig-name descname">create_encodings_from_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">images_list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.facialrecognition.encode_one.EncodeOne.create_encodings_from_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loops through a user images list and returns an encoding array
+which will be serialized to a .pickle file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>images_list</strong> (<em>list</em>) – list of images paths</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>encodings</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.facialrecognition.encode_one.EncodeOne.get_images_list_from_a_user">
+<code class="sig-name descname">get_images_list_from_a_user</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.facialrecognition.encode_one.EncodeOne.get_images_list_from_a_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns image list from a particular user dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>string</em>) – name of the user to encode</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>imagePaths</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.facialrecognition.encode_one.EncodeOne.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.facialrecognition.encode_one.EncodeOne.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Init and runs Encode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>string</em>) – user that’s being encoded</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.facialrecognition.encode_one.EncodeOne.turn_encodings_to_pickle">
+<code class="sig-name descname">turn_encodings_to_pickle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">encodings</span></em>, <em class="sig-param"><span class="n">user</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.facialrecognition.encode_one.EncodeOne.turn_encodings_to_pickle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a .pickle file from encodings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>encodings</strong> (<em>list</em>) – encoding of a face</p></li>
+<li><p><strong>user</strong> (<em>string</em>) – user that’s being encoded</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-utility.facialrecognition.recognizeuserface">
+<span id="utility-facialrecognition-recognizeuserface-module"></span><h2>utility.facialrecognition.recognizeuserface module<a class="headerlink" href="#module-utility.facialrecognition.recognizeuserface" title="Permalink to this headline">¶</a></h2>
+<p>recognize_user_face.py module, task is to read .pickle file of a user,
+and determine if the face is similar or not.</p>
+<dl class="py class">
+<dt id="utility.facialrecognition.recognizeuserface.RecognizeUserFace">
+<em class="property">class </em><code class="sig-prename descclassname">utility.facialrecognition.recognizeuserface.</code><code class="sig-name descname">RecognizeUserFace</code><a class="headerlink" href="#utility.facialrecognition.recognizeuserface.RecognizeUserFace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to recognize a user’s face with the corresponding encoding.</p>
+<dl class="py method">
+<dt id="utility.facialrecognition.recognizeuserface.RecognizeUserFace.encode_input_image">
+<code class="sig-name descname">encode_input_image</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.facialrecognition.recognizeuserface.RecognizeUserFace.encode_input_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns the input image to encoding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>string</em>) – user that’s being encoded</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>encodings</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.facialrecognition.recognizeuserface.RecognizeUserFace.match_input_with_pickle">
+<code class="sig-name descname">match_input_with_pickle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pickle_data</span></em>, <em class="sig-param"><span class="n">input_encodings</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.facialrecognition.recognizeuserface.RecognizeUserFace.match_input_with_pickle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Match the input image with known encodings and returns true if there’s a match</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pickle_data</strong> (<em>list</em>) – face encodings from pickle file</p></li>
+<li><p><strong>input_encodings</strong> (<em>list</em>) – input face encodings</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.facialrecognition.recognizeuserface.RecognizeUserFace.read_pickle">
+<code class="sig-name descname">read_pickle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.facialrecognition.recognizeuserface.RecognizeUserFace.read_pickle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads pickle file and returns the contents.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>string</em>) – user that’s being encoded</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utility.facialrecognition.recognizeuserface.RecognizeUserFace.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span></em><span class="sig-paren">)</span><a class="headerlink" href="#utility.facialrecognition.recognizeuserface.RecognizeUserFace.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets pickle, input, and determines if it matches.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>string</em>) – user that’s being encoded</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="utility-facialrecognition-test-fr-module">
+<h2>utility.facialrecognition.test_fr module<a class="headerlink" href="#utility-facialrecognition-test-fr-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-utility.facialrecognition">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-utility.facialrecognition" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">CarShare Application</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">agent-pi</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="auth.html">auth package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">data package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="menu.html">menu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mqtt.html">mqtt package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="startup.html">startup module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="utility.html">utility package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">utility.facialrecognition package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utility.videostream.html">utility.videostream package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">agent-pi</a><ul>
+  <li><a href="utility.html">utility package</a><ul>
+      <li>Previous: <a href="utility.html" title="previous chapter">utility package</a></li>
+      <li>Next: <a href="utility.videostream.html" title="next chapter">utility.videostream package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Thang, Alex, Jiajun, Duy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/utility.facialrecognition.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
