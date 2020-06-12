@@ -83,14 +83,21 @@ class Authenticator():
         vs = VideoStream()
         vs.stream('Engineer','qr')
         with open(QRCODE_PATH) as payload:
-            print(payload)
             if len(payload.readlines()) != 0:
                 payload.seek(0)
                 payloadData = json.load(payload)
-                print(payloadData)
+                print("Engineer identified: {}".format(payloadData))
             else:
-                    print("Empty")
+                print("Engineer not identified!")
         if payload:
+            # prompt engineer to enter issue id
+            issue_id = input('Enter issue ID: ')
+            # parse str to json to append payload
+            modifiedPayload = json.loads(payloadData)
+            # append payload with issue id
+            modifiedPayload['IssueID'] = int(issue_id)
+            # convert payload to str and prepare to publish
+            payloadData = json.dumps(modifiedPayload)
             pub = Publisher()
             pub.publish(payloadData, 'ENG')
             os.remove(QRCODE_PATH)
