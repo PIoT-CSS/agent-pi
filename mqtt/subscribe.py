@@ -49,7 +49,7 @@ class Subscriber:
         :param client: the client instance for this callback
         :type client: Client
         :param userdata: the private user data as
-        set in Client() or user_data_set()
+            set in Client() or user_data_set()
         :type userdata: any
         :param flags: response flags sent by the broker
         :type flags: dict
@@ -75,10 +75,10 @@ class Subscriber:
         :param client: the client instance for this callback
         :type client: Client
         :param userdata: the private user data as set in Client()
-        or user_data_set()
+            or user_data_set()
         :type userdata: any
         :param msg: an instance of MQTTMessage. This is a class with members
-        topic, payload, qos, retain.
+            topic, payload, qos, retain.
         :type msg: MQTTMessage
         """
         payload = msg.payload
@@ -148,11 +148,11 @@ class Subscriber:
         :param client: the client instance for this callback
         :type client: Client
         :param userdata: the private user data as set in Client() or
-        user_data_set()
+            user_data_set()
         :type userdata: any
         :param level: severity of the message
         :type level: MQTT_LOG_INFO, MQTT_LOG_NOTICE, MQTT_LOG_WARNING,
-        MQTT_LOG_ERR, MQTT_LOG_DEBUG
+            MQTT_LOG_ERR, MQTT_LOG_DEBUG
         :param buf: message buffer
         :type buf: bytes
         """
