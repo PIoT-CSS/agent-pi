@@ -20,6 +20,14 @@ mqtt.subscribe module
    :undoc-members:
    :show-inheritance:
 
+mqtt.test_mqtt module
+---------------------
+
+.. automodule:: mqtt.test_mqtt
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------
