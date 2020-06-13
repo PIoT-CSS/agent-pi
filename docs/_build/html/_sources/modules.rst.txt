@@ -10,3 +10,5 @@ agent-pi
    mqtt
    startup
    utility
+   utility.facialrecognition
+   utility.videostream

@@ -18,7 +18,7 @@ import json
 def action(name):
     """
     determines whether to use password or facial
-    recognition for authenticating.
+    recognition for authenticating, or unlock via Bluetooth and make repairs
     """
     if name == 'UserPass':
         print("\nAuthenticating {}\n".format(name))
@@ -32,14 +32,26 @@ def action(name):
         username = Screen().input('Enter in Username: ')
         auth = Authenticator()
         if auth.authenticate_facialrecognition(username):
-            Screen().input("Waiting for camera to take picture")
-    elif name == 'EngineerBT':
-        if BluetoothUnlocker().search_and_unlock():
             Screen().input('The car has been unlocked, '
                 + 'press [enter] to continue.')
+    elif name == 'EngineerBT':
+        #publish request to MP, requesting for engineers' Bluetooth MAC addr
+        pub = Publisher()
+        pub.publish("Requesting engineers' Bluetooth MAC addresses", 'MAC')
+        if BluetoothUnlocker().search_and_unlock():
+            Screen().input('The car has been unlocked, '
+                    + 'press [enter] to scan QR code.')
+            auth = Authenticator()
+            if auth.id_engineer():
+                Screen().input('Engineer profile verified!\n'
+                    + 'Issue will be marked as fixed if verified. '
+                    + 'Please visit carshare.com\nPress [enter] to continue.')
+            else:
+                Screen().input('Engineer profile verification failed, '
+                                + 'press [enter] to continue.')
         else:
             Screen().input('The car failed to unlock, '
-                + 'press [enter] to continue.')
+                    + 'press [enter] to continue.')
     elif name == 'Return':
         print("\nReturning the car")
         username = Screen().input('Enter in Username: ')
@@ -81,12 +93,12 @@ def main():
                                     formatter=submenu_formatter)
 
     unlock_pw = FunctionItem("Unlock the device with Username & Password ",
-                             action, args={"UserPass"}, should_exit=True)
+                            action, args={"UserPass"}, should_exit=True)
     unlock_fr = FunctionItem("Unlock the device with Facial Recoginition",
-                             action, args={
+                            action, args={
                                  "FaceRecog"}, should_exit=True)
-    unlock_engineer_bt = FunctionItem("Unlock with engineer's Bluetooth device",
-                        action, args={"EngineerBT"}, should_exit=True)
+    unlock_engineer_bt = FunctionItem("Unlock with engineer's Bluetooth device"
+        + " and resolve issue", action, args={"EngineerBT"}, should_exit=True)
     unlockcar_submenu.append_item(unlock_pw)
     unlockcar_submenu.append_item(unlock_fr)
     unlockcar_submenu.append_item(unlock_engineer_bt)
@@ -109,6 +121,7 @@ def main():
 
     # Show the menu
     menu.show()
+
 
 if __name__ == "__main__":
     try:

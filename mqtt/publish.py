@@ -26,6 +26,9 @@ class Publisher:
         """
         self.AUTH_FR_TOPIC = "AUTH/FR"
         self.AUTH_UP_TOPIC = "AUTH/UP"
+        self.RETURN_TOPIC = "RETURN"
+        self.MAC_ADDR_REQ_TOPIC = "REQ/MAC_ADDR"
+        self.ENG_TOPIC = 'ENG'
         self.BROKER_ADDRESS = BROKER_MASTER_IP
         self.BROKER_PORT = PORT
 
@@ -36,7 +39,7 @@ class Publisher:
         :param client: the client instance for this callback
         :type client: Client
         :param userdata: the private user data as set in Client()
-        or user_data_set()
+            or user_data_set()
         :type userdata: [type]
         :param result: Data being published
         :type result: String
@@ -89,5 +92,11 @@ class Publisher:
             client.publish(self.AUTH_FR_TOPIC, json.dumps(payload))
             client.disconnect()
         elif topic == 'RETURN':
-            client.publish('RETURN', json.dumps(payload))
+            client.publish(self.RETURN_TOPIC, json.dumps(payload))
+            client.disconnect()
+        elif topic == 'MAC':
+            client.publish(self.MAC_ADDR_REQ_TOPIC, json.dumps(payload))
+            client.disconnect()
+        elif topic == 'ENG':
+            client.publish(self.ENG_TOPIC, json.dumps(payload))
             client.disconnect()

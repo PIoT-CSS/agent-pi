@@ -4,6 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>auth package &#8212; CarShare Application 1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -48,7 +49,8 @@
 <dl class="py method">
 <dt id="auth.authenticate.Authenticator.authenticate_facialrecognition">
 <code class="sig-name descname">authenticate_facialrecognition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span></em><span class="sig-paren">)</span><a class="headerlink" href="#auth.authenticate.Authenticator.authenticate_facialrecognition" title="Permalink to this definition">¶</a></dt>
-<dd><p>If user chooses facial recognition, it will request user picture from MP. user captures
+<dd><p>If user chooses facial recognition, 
+it will request user picture from MP. user captures
 their face, runs facial recognition module and returns True/False.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -74,6 +76,25 @@ Sends MP the username and password with location of the car.</p>
 <li><p><strong>username</strong> (<em>string</em>) – user name that’s being authenticated</p></li>
 <li><p><strong>password</strong> (<em>string</em>) – password that’s being authenticated</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="auth.authenticate.Authenticator.id_engineer">
+<code class="sig-name descname">id_engineer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auth.authenticate.Authenticator.id_engineer" title="Permalink to this definition">¶</a></dt>
+<dd><p>If user chooses facial recognition, 
+it will request user picture from MP. user captures
+their face, runs facial recognition module and returns True/False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>username</strong> (<em>string</em>) – user name that’s being authenticated</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>boolean</p>
 </dd>
 </dl>
 </dd></dl>
@@ -112,6 +133,8 @@ Sends MP the username and password with location of the car.</p>
 <li class="toctree-l2"><a class="reference internal" href="mqtt.html">mqtt package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="startup.html">startup module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utility.html">utility package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utility.facialrecognition.html">utility.facialrecognition package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utility.videostream.html">utility.videostream package</a></li>
 </ul>
 </li>
 </ul>
@@ -153,7 +176,7 @@ Sends MP the username and password with location of the car.</p>
       &copy;2020, Thang, Alex, Jiajun, Duy.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

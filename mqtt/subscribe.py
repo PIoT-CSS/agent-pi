@@ -18,6 +18,8 @@ in_hash_md5 = hashlib.md5()
 DATASET_FOLDER = "./utility/facialrecognition/dataset"
 DATASET_EXTENSION = ".jpg"
 
+MAC_ADDR_FILE = "utility/mac_addresses.json"
+
 BROKER_AGENT_IP = str(os.getenv("AGENT_IP"))
 PORT = int(os.getenv("PORT"))
 
@@ -35,6 +37,7 @@ class Subscriber:
         self.AUTH_RESP_FR_TOPIC = "AUTH/RESP/FR"
         self.AUTH_RESP_UP_TOPIC = "AUTH/RESP/UP"
         self.RETURN_TOPIC = "RETURN"
+        self.MAC_ADDR_RESP_TOPIC = 'REQ/RESP/MAC_ADDR'
         self.broker_address = BROKER_AGENT_IP
         self.port = PORT
         self.USERNAME = "test"
@@ -46,7 +49,7 @@ class Subscriber:
         :param client: the client instance for this callback
         :type client: Client
         :param userdata: the private user data as
-        set in Client() or user_data_set()
+            set in Client() or user_data_set()
         :type userdata: any
         :param flags: response flags sent by the broker
         :type flags: dict
@@ -59,6 +62,7 @@ class Subscriber:
             client.subscribe(self.AUTH_RESP_FR_TOPIC)
             client.subscribe(self.AUTH_RESP_UP_TOPIC)
             client.subscribe(self.RETURN_TOPIC)
+            client.subscribe(self.MAC_ADDR_RESP_TOPIC)
         else:
             print("connection error, returned code=", rc)
 
@@ -71,10 +75,10 @@ class Subscriber:
         :param client: the client instance for this callback
         :type client: Client
         :param userdata: the private user data as set in Client()
-        or user_data_set()
+            or user_data_set()
         :type userdata: any
         :param msg: an instance of MQTTMessage. This is a class with members
-        topic, payload, qos, retain.
+            topic, payload, qos, retain.
         :type msg: MQTTMessage
         """
         payload = msg.payload
@@ -109,6 +113,12 @@ class Subscriber:
                     print('RETURNED CAR')
                 else:
                     print("RETURN CAR DENIED")
+            elif msg.topic == self.MAC_ADDR_RESP_TOPIC:
+                # load payload as json
+                mac_addresses = json.loads(payload)
+                # dump payload into MAC_ADDR_FILE json file
+                with open(MAC_ADDR_FILE, 'w') as mac_file:
+                    json.dump(mac_addresses, mac_file)
 
     def process_message(self, msg):
         """
@@ -138,11 +148,11 @@ class Subscriber:
         :param client: the client instance for this callback
         :type client: Client
         :param userdata: the private user data as set in Client() or
-        user_data_set()
+            user_data_set()
         :type userdata: any
         :param level: severity of the message
         :type level: MQTT_LOG_INFO, MQTT_LOG_NOTICE, MQTT_LOG_WARNING,
-        MQTT_LOG_ERR, MQTT_LOG_DEBUG
+            MQTT_LOG_ERR, MQTT_LOG_DEBUG
         :param buf: message buffer
         :type buf: bytes
         """
